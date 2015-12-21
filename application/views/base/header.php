@@ -20,10 +20,28 @@
 </head>
 <body>
 
-    <div class="gb-top-nav">
+    <div id="gb-top-nav">
         <div class="top-nav-info">
-            <a href="http://www.douban.com/accounts/login?source=movie" class="nav-login" rel="nofollow">登录</a>
-            <a href="http://www.douban.com/accounts/register?source=movie" class="nav-register" rel="nofollow">注册</a>
+            <ul class="top-nav-ul">
+                <li>欢迎来到七鹿，请</li>
+                <li><a href="" class="nav-login" rel="nofollow">登录</a></li>
+                <li>|</li>
+                <li><a href="" class="nav-register" rel="nofollow">注册</a></li>
+                <li>|</li>
+                <li><a href="" class="nav-register" rel="nofollow">个人中心</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="gb-top-menu">
+        <div class="top-menu-info">
+            <img src="<?php echo base_url('application/images/logo.png');?>"/>
+            <ul class="top-menu-ul">
+                <li><a href="" class="nav-login" rel="nofollow">首页</a></li>
+                <li><a href="" class="nav-register" rel="nofollow">打底裤</a></li>
+                <li><a href="" class="nav-register" rel="nofollow">丝袜</a></li>
+                <li><a href="" class="nav-register" rel="nofollow">关于我们</a></li>
+            </ul>
         </div>
     </div>
 

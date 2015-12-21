@@ -1,27 +1,55 @@
-.gb-top-nav {
+a {
+    color: #666;
+    text-decoration: none;
+}
+/*gb-top-nav begin*/
+#gb-top-nav {
     height: 28px;
-    color: #d5d5d5;
+    background-color: #F1F1F1;
+    min-width: 960px;
+}
+#gb-top-nav a:hover {
+    color: #3385ff;
+}
+#gb-top-nav .top-nav-info {
+    margin: 0 auto;
+    line-height: 28px;
+    width:960px;
+}
+#gb-top-nav .top-nav-info .top-nav-ul {
+    float: right;
+}
+#gb-top-nav .top-nav-info .top-nav-ul li {
+    float: left;
+    padding-left: 12px;
+}
+/*gb-top-nav end*/
+
+/*gb-top-menu begin*/
+#gb-top-menu {
+    height: 80px;
     background-color: #3385ff;
     min-width: 960px;
 }
-.gb-top-nav a:link, .gb-top-nav a:visited, .gb-top-nav a:hover, .gb-top-nav a:active {
-    color: #d5d5d5;
-}
-.gb-top-nav a:hover {
-    color: #FFFFFF;
-}
-.gb-top-nav .top-nav-info {
-    float: right;
-    margin: 0 12px 0 0;
+#gb-top-menu .top-menu-info {
+    margin: 0 auto;
     line-height: 28px;
+    width:960px;
 }
-.gb-top-nav .top-nav-info a {
-    display: inline-block;
-    zoom: 1;
-    margin: 0;
-    padding: 0 12px;
-    height: 28px;
+#gb-top-menu .top-menu-info .top-menu-ul {
+    float: right;
 }
+#gb-top-menu .top-menu-info .top-menu-ul li {
+    color: #ffffff;
+    float: left;
+    padding-left: 50px;
+    font-size: 15px;
+    padding-top: 25px;
+}
+#gb-top-menu .top-menu-info .top-menu-ul li a {
+    color: #ffffff;
+}
+/*gb-top-menu end*/
 
 .gb-top-poster {
     background-color: #f0f3f5;
