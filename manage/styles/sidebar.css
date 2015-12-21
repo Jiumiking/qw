@@ -1,0 +1,177 @@
+@import url('reset.css');
+/* ===== sidebar ===== */
+
+html {
+}
+body {
+    background: transparent;
+}
+.sidebar{
+    width:156px; float:left; margin-left:-156px;
+}
+.bar {
+	background:#f7f8f9 url("../images/sidebar/bar_h3.png") no-repeat 3px 3px;
+    width: 150px;
+    padding: 3px;
+    margin-bottom: 2px;
+}
+.bar h3 {
+    width: 121px;
+    padding-left:26px;
+    height: 31px;
+    line-height: 31px;
+	font-weight:bold;
+}
+
+.bar .system_config_icon{background:url("../images/sidebar/system_set/system_config_icon.png") no-repeat 5px center;}
+.bar .pay_list_admin_icon{background:url("../images/sidebar/system_set/pay_list_admin_icon.png") no-repeat 5px center;}
+.bar .invoice_list_admin_icon{background:url("../images/sidebar/system_set/invoice_list_admin_icon.png") no-repeat 5px center;}
+.bar .delivery_list_admin_icon{background:url("../images/sidebar/system_set/delivery_list_admin_icon.png") no-repeat 5px center;}
+.bar .affair_set_icon{background:url("../images/sidebar/system_set/affair_set_icon.png") no-repeat 5px center;}
+.bar .recall_config_icon{background:url("../images/sidebar/system_set/recall_config_icon.png") no-repeat 5px center;}
+
+.bar .user_icon{background:url("../images/sidebar/user_manage_system/user_icon.png") no-repeat 5px center;}
+.bar .role_icon{background:url("../images/sidebar/user_manage_system/role_icon.png") no-repeat 5px center;}
+.bar .work_team_icon{background:url("../images/sidebar/user_manage_system/work_team_icon.png") no-repeat 5px center;}
+.bar .work_seat_icon{background:url("../images/sidebar/user_manage_system/work_seat_icon.png") no-repeat 5px center;}
+.bar .work_icon{background:url("../images/sidebar/user_manage_system/work_icon.png") no-repeat 5px center;}
+.bar .admin_monitor_icon{background:url("../images/sidebar/user_manage_system/admin_monitor_icon.png") no-repeat 5px center;}
+
+.bar .ext_team_icon{background:url("../images/sidebar/ext_manager/ext_team_icon.png") no-repeat 5px center;}
+.bar .ext_phone_manage_icon{background:url("../images/sidebar/ext_manager/ext_phone_manage_icon.png") no-repeat 5px center;}
+
+.bar .customer_icon{background:url("../images/sidebar/customer_moudle/customer_icon.png") no-repeat 5px center;}
+.bar .customer_sets_icon{background:url("../images/sidebar/customer_moudle/customer_sets_icon.png") no-repeat 5px center;}
+.bar .integral_icon{background:url("../images/sidebar/customer_moudle/integral_icon.png") no-repeat 5px center;}
+.bar .funds_manage_icon{background:url("../images/sidebar/customer_moudle/funds_manage_icon.png") no-repeat 5px center;}
+
+.bar .filter_icon{background:url("../images/sidebar/filter_module/filter_icon.png") no-repeat 5px center;}
+
+.bar .product_msg_icon{background:url("../images/sidebar/product_manage/product_msg_icon.png") no-repeat 5px center;}
+.bar .cata_list_admin_icon{background:url("../images/sidebar/product_manage/cata_list_admin_icon.png") no-repeat 5px center;}
+.bar .brand_list_admin_icon{background:url("../images/sidebar/product_manage/brand_list_admin_icon.png") no-repeat 5px center;}
+.bar .provide_list_admin_icon{background:url("../images/sidebar/product_manage/provide_list_admin_icon.png") no-repeat 5px center;}
+
+.bar .order_list_icon{background:url("../images/sidebar/product_order/order_list_icon.png") no-repeat 5px center;}
+.bar .goods_manage_icon{background:url("../images/sidebar/product_order/goods_manage_icon.png") no-repeat 5px center;}
+
+.bar .admin_call_list_icon{background:url("../images/sidebar/inform_manage/admin_call_list_icon.png") no-repeat 5px center;}
+.bar .voice_mail_admin_icon{background:url("../images/sidebar/inform_manage/voice_mail_admin_icon.png") no-repeat 5px center;}
+.bar .inform_icon{background:url("../images/sidebar/inform_manage/inform_icon.png") no-repeat 5px center;}
+.bar .notice_icon{background:url("../images/sidebar/inform_manage/notice_icon.png") no-repeat 5px center;}
+.bar .sms_icon{background:url("../images/sidebar/inform_manage/sms_icon.png") no-repeat 5px center;}
+
+.bar .affairs_msg_icon{background:url("../images/sidebar/knowledge/affairs_msg_icon.png") no-repeat 5px center;}
+.bar .know_icon{background:url("../images/sidebar/knowledge/know_icon.png") no-repeat 5px center;}
+.bar .satis_icon{background:url("../images/sidebar/knowledge/satis_icon.png") no-repeat 5px center;}
+.bar .satisfact_icon{background:url("../images/sidebar/knowledge/satisfact_icon.png") no-repeat 5px center;}
+
+.bar .report_statistics_icon{background:url("../images/sidebar/report/report_statistics_icon.png") no-repeat 5px center;}
+.bar .order_icon{background:url("../images/sidebar/report/order_icon.png") no-repeat 5px center;}
+.bar .sale_icon{background:url("../images/sidebar/report/sale_icon.png") no-repeat 5px center;}
+.bar .guest_icon{background:url("../images/sidebar/report/guest_icon.png") no-repeat 5px center;}
+.bar .flow_stats_icon{background:url("../images/sidebar/report/flow_stats_icon.png") no-repeat 5px center;}
+.bar .satisfaction_icon{background:url("../images/sidebar/report/satisfaction_icon.png") no-repeat 5px center;}
+
+.bar .admin_log_icon{background:url("../images/sidebar/system_operate/admin_log_icon.png") no-repeat 5px center;}
+
+.bar .admin_department_icon{background:url("../images/sidebar/user_manage_system/work_team_icon.png") no-repeat 5px center;}
+
+.bar ul {
+    border: 1px solid #d4d4d5;
+    width: 128px;
+    padding:10px 10px;
+}
+.bar ul li a{
+    color: #4d4d4f;
+    display: block;
+    width: 113px;
+    padding-left: 16px;
+    height: 25px;
+    line-height: 25px;
+    border-bottom: 1px dashed #d4d4d5;   
+}
+.bar ul li a:hover , .bar ul li a.sidebar_select {
+    background: #e8e8e8;
+}
+.bar ul li.last a {
+    border-bottom: none;
+}
+
+
+
+
+
+
+
+.iconsbox {
+    width: 160px;
+    float:left;
+    background: #ffffff;
+    border: 1px solid #d4d4d5;
+    height: 589px;
+    margin-right: 4px;
+}
+.iconsbox .icons_title {
+    height: 31px;
+    line-height: 31px;
+    background: url(index_customer/title_bgg.png) repeat-x;
+    color: #333;
+    border-bottom: 1px solid #d4d4d5;
+    text-align: center;
+}
+.iconsbox .icons_title h3 {
+    font-weight: bold;
+}
+
+.iconsbox .icons_body a.icons {
+    clear: both;
+    display: block;
+    width: 72px;
+    height: 80px;
+    margin: 10px auto;
+}
+
+.iconsbox .icons_body a.icon1 {
+    background: url(index_customer/x_icon.PNG) no-repeat;   
+}
+.iconsbox .icons_body a.icon1:hover {
+    background: url(index_customer/dx_icon.PNG) no-repeat;   
+}
+
+
+.iconsbox .icons_body a.icon2 {
+    background: url(index_customer/kh_icon.PNG) no-repeat;   
+}
+.iconsbox .icons_body a.icon2:hover {
+    background: url(index_customer/dkh_icon.PNG) no-repeat;   
+}
+
+.iconsbox .icons_body a.icon3 {
+    background: url(index_customer/xj_icon.PNG) no-repeat;   
+}
+.iconsbox .icons_body a.icon3:hover {
+    background: url(index_customer/dxj_icon.PNG) no-repeat;   
+}
+
+.iconsbox .icons_body a.icon4 {
+    background: url(index_customer/zs_icon.PNG) no-repeat;   
+}
+.iconsbox .icons_body a.icon4:hover {
+    background: url(index_customer/dzs_icon.PNG) no-repeat;   
+}
+
+
+.iconsbox .icons_body a.icon5 {
+    background: url(index_customer/gg_icon.PNG) no-repeat;   
+}
+.iconsbox .icons_body a.icon5:hover {
+    background: url(index_customer/dgg_icon.PNG) no-repeat;   
+}
+
+.iconsbox .icons_body a.icon6 {
+    background: url(index_customer/tz_icon.PNG) no-repeat;   
+}
+.iconsbox .icons_body a.icon6:hover {
+    background: url(index_customer/dtz_icon.PNG) no-repeat;   
+}

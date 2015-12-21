@@ -1,0 +1,100 @@
+@import url('reset.css');
+html {
+    height: 119px;
+}
+body {
+    height: 119px;
+    
+
+
+}
+/* ===== header ===== */
+.header{width:100%; min-width:1000px; background:#f1f1f1; clear:both;height: 119px;overflow: hidden; }
+.header .logo{
+    margin-bottom:0px;
+    height: 70px;
+    overflow: hidden;
+}
+.header .logo h1{ height:24px; margin: 17px 0px 0 35px; padding:6px 0;}
+.header .logo h1 a{color:#f60; display:inline-block;}
+.header .logo p a{margin:0 10px; color:#a4a5a8; }
+.header img.logo{ height: 45px;margin-top: -10px; }
+.header .menu{
+    padding-left:35px;  height:41px;
+    background: #575e64;
+    border-top: 1px solid #9ea1a3;
+    border-bottom:4px solid #16ada8;
+}
+.header .menu .menu_list {
+    
+}
+.header .menu .menu_list li{float:left; margin-right:5px; font-size:12px; font-weight:bold;font-family: "宋体";}
+.header .menu .menu_list li.last{border-right:0 none;}
+.header .menu .menu_list li a{
+	outline-style:none;
+    display:block;  
+    color:#ebebeb;
+    width: 73px;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    font-weight: bold;
+}
+.header .menu .menu_list li a:hover{
+    background: url(../images/header/nav02.png) no-repeat bottom left;
+}
+.header .menu .menu_list li a.select{
+    color: #fff;
+    background: url(../images/header/nav01.png) no-repeat bottom left;
+    line-height: 48px;
+}
+
+
+.toolbar {
+    height: 39px;
+    margin: 16px 16px 0 0;
+    
+}
+.left {
+    float: right;
+    width: 14px;
+    height: 39px;
+    background: url(../images/header/toolbar_left.png) no-repeat top left;
+}
+.right {
+    float: right;
+    width: 14px;
+    height: 39px;
+    background: url(../images/header/toolbar_right.png) no-repeat top right;
+}
+.center {
+    float: right;
+    height: 29px;
+    padding-top: 10px;
+    background: url(../images/header/toolbar_center.png) repeat-x top left;
+}
+
+.icons {
+    height: 39px;
+    font-family: "宋体";
+}
+.icons a {
+    height: 16px;
+    line-height: 16px;
+    display: block;
+    float:left;
+    color: #6e6e6e;
+    font-size: 12px;
+    font-family: "宋体";
+    font-weight: normal;
+}
+.icons span {
+    height: 13px;
+    line-height: 13px;
+    float:left;
+    color: #6e6e6e;
+}
+.icons span a {
+    float: none;
+    display: inline;
+}

@@ -1,0 +1,40 @@
+body,p,h1{ margin:0; }
+img{ border:0; }
+a{ text-decoration:none; }
+body{ font:14px/1.5 "Microsoft yahei",arial,Tahoma,Helvetica,simsun,sans-serif; }
+.cf:after{ content:"."; height:0; visibility:hidden; display:block; clear:both; font-size:0; line-height:0; }
+.cf{ *zoom:1; }
+.header{ width:100%; padding:20px 0; background:url("../images/login/line_1.png") repeat-x left bottom; }
+.header h1{ width:980px; margin:0 auto; text-align:left; }
+.header .logo{ height: 77px; }
+
+.main{ width:920px; height:300px; margin-top:-150px; margin-left:-490px; padding:0 30px; position:absolute; left:50%; top:50%; }
+.main .login_form{ float:right; padding:15px 35px 15px 0; margin:20px 0; background-color:#fbfcfc; border:1px solid #e1dfdf; }
+.main .login_form p{ margin-top:24px;cursor:pointer; }
+.main .login_form p label{ display:inline-block; width:80px; margin-right:10px; height:32px; vertical-align:top; text-indent:-9999em; }
+.main .login_form p input{ vertical-align:middle; }
+.main .login_form p input[type="text"],.main .login_form p input[type="password"]{ width:248px; height:26px; line-height:26px; padding:2px 5px; border:1px solid #c9c9c9; }
+.main .login_form p input.w50{ width:50px; margin-right:10px; }
+.main .login_form p input[type="button"]{ width:121px; height:37px; padding:0; margin-right:10px; background:url("../images/login/login-en_06.png") no-repeat; border:0;cursor:pointer; }
+.main .login_form p input[type="button"]:hover { background:url(../images/login/login-en_07.png) no-repeat;}
+.main .login_form p.login_bt{ padding-left:90px; height:37px; line-height:37px; }
+.main .login_form p.dn{ display:none; }
+.main .login_form p.db{ display:block; }
+
+.main .info{ float:left; }
+.main .info p{ text-align:right; margin-bottom:20px; }
+
+.footer{ position:fixed; bottom:0; margin-top:20px; width:100%; padding:10px 0 20px; background:url("../images/login/line_2.png") repeat-x left top; }
+.footer p{ width:980px; margin:0 auto; text-align:center; font-size:12px; color:#d7d7d7; }
+.footer p a{ color:#d7d7d7; }
+
+#AjaxProgress.ssoOverlay{ overflow: hidden; width: 100%; }
+.ssoOverlay{ display:none; width: 690px; z-index: 10000; }
+.load_content { background:#666666 url("../images/login/ajaxload.info_FFFFFF_facebook.gif") no-repeat center center; float: right; height: 30px; width: 85px; }
+#message{ font-size:13px; color:red; vertical-align:middle; }
+
+.es-number { background:url(../images/login/login-en_01.png) no-repeat 70% 0; }
+.es-name { background:url(../images/login/login-en_02.png) no-repeat 70% 0; }
+.es-password { background:url(../images/login/login-en_03.png) no-repeat 70% 0; }
+.es-verification { background:url(../images/login/login-en_04.png) no-repeat 70% 0; }
+.es-refresh { background:url(../images/login/login-en_05.png) no-repeat 70% 0; display:inline-block; height:20px;width:21px; margin-left:10px; }
