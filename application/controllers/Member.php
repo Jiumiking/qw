@@ -6,26 +6,33 @@
  * @category    Controllers
  * @author      ming.king
  */
-class Home extends P_Controller{
+class Member extends M_Controller{
     /**
      * 构造函数
-     *
      * @access  public
      * @return  void
      */
     public function __construct(){
         parent::__construct();
-        $this->this_view_data['_js'][] = 'slider';
     }
     /**
-     * 后台默认首页
-     *
+     * 默认首页
      * @access  public
      * @return  void
      */
     public function index(){
+        $this->center();
+    }
+    /**
+     * 后台默认首页
+     * @access  public
+     * @return  void
+     */
+    public function center(){
+        echo '用户中心';
         $this->load->view('home',$this->this_view_data);
     }
+
 }
 
 

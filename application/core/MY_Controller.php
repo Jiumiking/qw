@@ -1,77 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * 基类
- *
- * @package     CI
- * @subpackage  core
- * @category    core
- * @author      jinjunming
- * @link        
- */
- class Controller_base extends CI_Controller{
-     /**
-     * 输出变量
-     *
-     * @var object
-     * @access  public
-     **/
-    protected $_views = array();
-     /**
-     * 保存当前设置信息
-     *
-     * @var object
-     * @access  public
-     **/
-    protected $this_setting = array();
-     /**
-     * 构造函数
-     *
-     * @access  public
-     * @return  void
-     */
-    public function __construct(){
-        parent::__construct();
-        require_once('MY_Function.php');
-        $this->load->library('session');
-        //$this->load->model('mdl_user');
-        //$this->load->model('mdl_setting');
-        //$this->get_setting();
-    }
-    /**
-     * 配置信息
-     *
-     * @access  protected
-     * @return  void
-     */
-    private function get_setting(){
-        $this->this_setting = $this->mdl_setting->get_settings();
-        $this->_views['this_setting'] = $this->this_setting;
-    }
-    /**
-     * 跳转方法
-     *
-     * @access  protected
-     * @return  void
-     */
-    protected function jump_url($url='', $message='跳转中！', $time=3){
-        $data['url'] = empty($url)?$_SERVER['HTTP_REFERER']:$url;
-        $data['message'] = $message;
-        $data['time'] = $time;
-        $retrun = $this->load->view('base/jump_url',$data,true);
-        echo $retrun;
-        exit;
-    }
- }
- /**
  * CI后台控制器基类
  *
  * @package     CI
  * @subpackage  core
  * @category    core
- * @author      jinjunming
- * @link        
- */		
- class MY_Controller extends Controller_base{
+ * @author      ming.king
+ * @link
+ */
+class M_Controller extends P_Controller{
     /**
      * 保存当前登录用户的信息
      *
@@ -79,20 +16,9 @@
      * @access  public
      **/
     protected $this_user = NULL;
-    /**
-     * ajax返回数组
-     *
-     * @var string
-     * @access  protected
-     **/
-    protected $ajax_views = array(
-        'status' => '0',
-        'msg' => '操作失败',
-        'data' => '',
-    );
+
     /**
      * 构造函数
-     *
      * @access  public
      * @return  void
      */
@@ -102,24 +28,126 @@
     }
     /**
      * 入口方法
-     *
      * @access  public
      * @return  void
      */
     private function ini(){
-        $this->_views['_js'][] = 'jquery';
-        $this->_views['_js'][] = 'slider';
-        $this->_views['_css'][] = 'reset';
-        $this->_views['_css'][] = 'base';
+        $this->check_login();
+    }
+    /**
+     * 检查用户是否登录
+     * @access  protected
+     * @return  void
+     */
+    private function check_login(){
+        if ( !$this->session->this_user ){
+            redirect( site_url('member/login') );
+        }else{
+            $this->this_user = $this->session->this_user;
+            $this->this_view_data['this_user'] = $this->session->this_user;
+        }
+    }
+}
+/**
+ * 基类
+ *
+ * @package     CI
+ * @subpackage  core
+ * @category    core
+ * @author      ming.king
+ * @link
+ */
+class P_Controller extends CI_Controller{
+    /**
+     * ajax返回数组
+     *
+     * @var string
+     * @access  protected
+     **/
+    protected $ajax_data = array(
+        'sta' => '0',
+        'msg' => '操作失败',
+        'dat' => '',
+    );
+    /**
+     * 当前控制器
+     * @access  protected
+     **/
+    protected $this_controller = '';
+    /**
+     * 当前model
+     * @access  protected
+     **/
+    protected $this_model = '';
+    /**
+     * 每页数量
+     * @access  protected
+     **/
+    protected $this_page_size = '';
+    /**
+     * 输出变量
+     * @var object
+     * @access  public
+     **/
+    protected $this_view_data = array();
+    /**
+     * 保存当前设置信息
+     * @var object
+     * @access  public
+     **/
+    protected $this_setting = array();
+    /**
+     * 构造函数
+     * @access  public
+     * @return  void
+     */
+    public function __construct(){
+        parent::__construct();
+        require_once('MY_Function.php');
+        $this->load->model('mdl_setting');
+        $this->get_this_setting();
+
+        $this->this_controller = $this->uri->rsegment(1);
+        $this->this_model = 'Mdl_'.$this->this_controller;
+        if( file_exists(APPPATH.'models/'.$this->this_model.'.php') ){
+            $this->load->model( $this->this_model );
+        }
+        $this->this_page_size = empty($this->this_setting['page_number'])?10:$this->this_setting['page_number'];
+        $this->this_view_data['this_controller'] = $this->this_controller;
+        $this->this_view_data['_js'][] = 'jquery';
+        $this->this_view_data['_js'][] = 'authen';
+        $this->this_view_data['_css'][] = 'reset';
+        $this->this_view_data['_css'][] = 'style';
     }
     /**
      * 接口结束返回
-     *
      * @access  protected
      * @return  bool
      */
     protected function ajax_end(){
-        echo json_encode($this->ajax_views);
+        echo json_encode($this->ajax_data);
+        exit;
+    }
+    /**
+     * 配置信息
+     * @access  protected
+     * @return  void
+     */
+    private function get_this_setting(){
+        $this->this_setting = $this->mdl_setting->get_settings();
+        $this->this_view_data['this_setting'] = $this->this_setting;
+    }
+    /**
+     * 跳转方法
+     * @access  protected
+     * @return  void
+     */
+    protected function jump_url($url='', $message='跳转中！', $time=3){
+        $this_view_data['url'] = empty($url)?$_SERVER['HTTP_REFERER']:$url;
+        $this_view_data['message'] = $message;
+        $this_view_data['time'] = $time;
+        $retrun = $this->load->view('base/jump_url',$this_view_data,true);
+        echo $retrun;
         exit;
     }
 }

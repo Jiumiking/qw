@@ -80,7 +80,7 @@ $db['default'] = array(
 	'password' => 'root',
 	'database' => 'qw',
 	'dbdriver' => 'mysql',
-	'dbprefix' => '',
+	'dbprefix' => 'qi_',
 	'pconnect' => TRUE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,
