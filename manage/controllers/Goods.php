@@ -15,11 +15,9 @@ class Goods extends MY_Controller{
     public function __construct(){
         parent::__construct();
         $this->_views['_js'][] = 'datepicker/WdatePicker';
-        $this->load->model('mdl_tag');
+        $this->load->model('mdl_goods_type');
         $this->load->library('upload');
-        $this->_views['data_tag_1'] = $this->mdl_tag->my_selects( 0, 0, array('type'=>'1') );
-        $this->_views['data_tag_2'] = $this->mdl_tag->my_selects( 0, 0, array('type'=>'2') );
-        $this->_views['data_tag_3'] = $this->mdl_tag->my_selects( 0, 0, array('type'=>'3') );
+        $this->_views['data_goods_type'] = $this->mdl_goods_type->my_selects( 0, 0 );
     }
     /**
      * 编辑ajax
@@ -42,7 +40,7 @@ class Goods extends MY_Controller{
      * @param   mixed
      * @return  mixed
      */
-    public function my_edit_do(){//echo '<pre>';print_r($_FILES);exit;
+    public function my_edit_do(){echo '<pre>';print_r($_POST);exit;
         $data=$_POST;
         $content = $data['content'];
         $tag1 = $data['tag1'];

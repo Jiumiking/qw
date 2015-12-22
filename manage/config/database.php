@@ -79,7 +79,7 @@ $db['default'] = array(
 	'username' => 'k723528197',
 	'password' => 'kimjin1234',
 	'database' => 'k723528197',
-	'dbdriver' => 'mysql',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => 'qi_',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),

@@ -44,22 +44,46 @@
 </div>
 
 <?php $this->load->view('base/list_js'); ?>
+<script type="text/javascript" src="<?php echo base_url('js/ueditor.config.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('js/ueditor.all.min.js');?>"> </script>
 <script type="text/javascript">
 //编辑验证函数
 function edit_authen(){
-    var name_ch = $("#name_ch").authen({reg:'nickname',err_name:'中文名称',min_length:2,max_length:50,empty:false});
-    var name_en = $("#name_en").authen({err_name:'英文名称',min_length:2,max_length:50,empty:true});
-    var name_other = $("#name_other").authen({err_name:'其他名称',min_length:2,max_length:200,empty:true});
-    var place = $("#place").authen({err_name:'地区',empty:false});
-    var language = $("#language").authen({err_name:'地区',empty:false});
-    var back = name_ch && name_en && name_other && place && language;
+    var type = $("#type").authen({err_name:'商品类型',empty:false});
+    var name = $("#name").authen({err_name:'商品名称',min_length:2,max_length:50,empty:false});
+    var money = $("#money").authen({err_name:'商品价格',empty:false});
+    var back = type && name;
     return back;
+}
+//新增、编辑
+function edit( id ){
+    $.ajax({
+        type : "GET",
+        async : false,
+        url : "<?php echo site_url($this_controller.'/my_edit');?>",
+        data : { id:id },
+        success : function(msg){
+            if(msg){
+                var msgobj = eval("("+ msg +")");
+                if(msgobj.sta == '1'){
+                    $('#div_show').html(msgobj.dat);
+                    $('#div_show').show();
+                    $('#div_content').hide();
+                    var ue = UE.getEditor('detail');
+                }else{
+                    alert(msgobj.msg);
+                }
+            }
+        }
+    });
 }
 function size_add(){
     $("#size_td").append('<p class="mt10"><input type="text" name="size[]" value="">&nbsp;&nbsp;<img class="cp" title="删除" onclick="p_del(this)" src="<?php echo base_url('images/icon_delete.png');?>"></p>');
 }
+var ct = 0;
 function colour_add(){
-    $("#colour_td").append('<p class="mt10">颜色：<input type="text" name="colour[]" value="">&nbsp;&nbsp;价格：<input type="text" name="money[]" value="">&nbsp;&nbsp;库存：<input type="text" name="amount[]" value="">&nbsp;&nbsp;<img class="cp" title="删除" onclick="p_del(this)" src="<?php echo base_url('images/icon_delete.png');?>"></p>');
+    $("#colour_td").append('<p class="mt10">颜色：<input type="text" name="colour['+ct+'][name]" value="">&nbsp;&nbsp;起伏价格：<input type="text" name="colour['+ct+'][money]" value="">&nbsp;&nbsp;<img class="cp" title="删除" onclick="p_del(this)" src="<?php echo base_url('images/icon_delete.png');?>"></p>');
+    ct++;
 }
 function p_del(obj){
     $(obj).parent().remove();

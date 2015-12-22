@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2015-12-20 22:24:04
+Date: 2015-12-22 21:01:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -77,6 +77,8 @@ CREATE TABLE `qi_goods` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `number` int(20) NOT NULL DEFAULT '0',
   `name` varchar(100) NOT NULL DEFAULT '',
+  `type` int(20) NOT NULL DEFAULT '0',
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00',
   `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1上架2下架',
@@ -88,6 +90,25 @@ CREATE TABLE `qi_goods` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for qi_goods_amount
+-- ----------------------------
+DROP TABLE IF EXISTS `qi_goods_amount`;
+CREATE TABLE `qi_goods_amount` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `size` int(20) NOT NULL DEFAULT '0',
+  `colour` int(20) NOT NULL DEFAULT '0',
+  `amount` int(20) NOT NULL DEFAULT '0',
+  `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qi_goods_amount
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for qi_goods_colour
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_goods_colour`;
@@ -96,7 +117,6 @@ CREATE TABLE `qi_goods_colour` (
   `name` varchar(20) NOT NULL DEFAULT '',
   `goods` int(20) NOT NULL DEFAULT '0',
   `money` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `amount` int(20) NOT NULL DEFAULT '0',
   `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` tinyint(1) NOT NULL DEFAULT '0',
@@ -144,6 +164,25 @@ CREATE TABLE `qi_goods_size` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for qi_goods_type
+-- ----------------------------
+DROP TABLE IF EXISTS `qi_goods_type`;
+CREATE TABLE `qi_goods_type` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL DEFAULT '',
+  `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qi_goods_type
+-- ----------------------------
+INSERT INTO `qi_goods_type` VALUES ('1', '打底裤', '2015-12-21 20:46:47', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_goods_type` VALUES ('2', '丝袜', '2015-12-21 20:47:25', '0000-00-00 00:00:00', '1');
+
+-- ----------------------------
 -- Table structure for qi_log
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_log`;
@@ -154,7 +193,7 @@ CREATE TABLE `qi_log` (
   `ip_address` varchar(32) DEFAULT NULL,
   `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qi_log
@@ -253,6 +292,9 @@ INSERT INTO `qi_log` VALUES ('91', '100', '登录成功', '127.0.0.1', '2015-12-
 INSERT INTO `qi_log` VALUES ('92', '100', '登录成功', '127.0.0.1', '2015-12-20 08:22:39');
 INSERT INTO `qi_log` VALUES ('93', '100', '登录成功', '127.0.0.1', '2015-12-20 12:21:33');
 INSERT INTO `qi_log` VALUES ('94', '100', '登录成功', '127.0.0.1', '2015-12-20 19:57:45');
+INSERT INTO `qi_log` VALUES ('95', '100', '登录成功', '127.0.0.1', '2015-12-21 20:34:13');
+INSERT INTO `qi_log` VALUES ('96', '100', '登录成功', '127.0.0.1', '2015-12-21 22:02:22');
+INSERT INTO `qi_log` VALUES ('97', '100', '登录成功', '127.0.0.1', '2015-12-22 20:19:34');
 
 -- ----------------------------
 -- Table structure for qi_member
@@ -330,7 +372,7 @@ INSERT INTO `qi_menu` VALUES ('7', '权限管理', 'role', 'my_list', '4', '1', 
 INSERT INTO `qi_menu` VALUES ('8', '角色管理', 'role', 'my_list', '7', '1', '3', '0', '1');
 INSERT INTO `qi_menu` VALUES ('20', '日志管理', 'log', 'my_list', '1', '1', '2', '0', '1');
 INSERT INTO `qi_menu` VALUES ('21', '日志管理', 'log', 'my_list', '20', '1', '3', '0', '1');
-INSERT INTO `qi_menu` VALUES ('26', '影视管理', 'film', 'my_list', '0', '1', '1', '0', '0');
+INSERT INTO `qi_menu` VALUES ('26', '影视管理', 'film', 'my_list', '0', '1', '1', '0', '1');
 INSERT INTO `qi_menu` VALUES ('27', '影视管理', 'film', 'my_list', '26', '1', '2', '0', '1');
 INSERT INTO `qi_menu` VALUES ('28', '影视管理', 'film', 'my_list', '27', '1', '3', '0', '1');
 INSERT INTO `qi_menu` VALUES ('29', '标签管理', 'tag', 'my_list', '26', '1', '2', '0', '1');
@@ -345,7 +387,7 @@ INSERT INTO `qi_menu` VALUES ('37', '订单管理', 'order', 'my_list', '35', '1
 INSERT INTO `qi_menu` VALUES ('38', '商品管理', 'goods', 'my_list', '0', '1', '1', '0', '1');
 INSERT INTO `qi_menu` VALUES ('39', '商品管理', 'goods', 'my_list', '38', '1', '2', '0', '1');
 INSERT INTO `qi_menu` VALUES ('40', '商品管理', 'goods', 'my_list', '39', '1', '3', '0', '1');
-INSERT INTO `qi_menu` VALUES ('41', '', '', '', '0', '0', '0', '0', '1');
+INSERT INTO `qi_menu` VALUES ('41', '商品类型', 'goods_type', 'my_list', '39', '1', '3', '0', '1');
 
 -- ----------------------------
 -- Table structure for qi_order
