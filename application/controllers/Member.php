@@ -29,6 +29,7 @@ class Member extends M_Controller{
      * @return  void
      */
     public function center(){
+        echo '<pre>';print_r($_SESSION);exit;
         echo '用户中心';
         $this->load->view('home',$this->this_view_data);
     }

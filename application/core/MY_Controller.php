@@ -10,41 +10,14 @@
  */
 class M_Controller extends P_Controller{
     /**
-     * 保存当前登录用户的信息
-     *
-     * @var object
-     * @access  public
-     **/
-    protected $this_user = NULL;
-
-    /**
      * 构造函数
      * @access  public
      * @return  void
      */
     public function __construct(){
         parent::__construct();
-        $this->ini();
-    }
-    /**
-     * 入口方法
-     * @access  public
-     * @return  void
-     */
-    private function ini(){
-        $this->check_login();
-    }
-    /**
-     * 检查用户是否登录
-     * @access  protected
-     * @return  void
-     */
-    private function check_login(){
         if ( !$this->session->this_user ){
-            redirect( site_url('member/login') );
-        }else{
-            $this->this_user = $this->session->this_user;
-            $this->this_view_data['this_user'] = $this->session->this_user;
+            redirect( site_url('sign/signin') );
         }
     }
 }
@@ -58,6 +31,13 @@ class M_Controller extends P_Controller{
  * @link
  */
 class P_Controller extends CI_Controller{
+    /**
+     * 保存当前登录用户的信息
+     *
+     * @var object
+     * @access  public
+     **/
+    protected $this_user = NULL;
     /**
      * ajax返回数组
      *
@@ -118,6 +98,19 @@ class P_Controller extends CI_Controller{
         $this->this_view_data['_js'][] = 'authen';
         $this->this_view_data['_css'][] = 'reset';
         $this->this_view_data['_css'][] = 'style';
+
+        $this->this_user_set();
+    }
+    /**
+     * 检查用户是否登录
+     * @access  protected
+     * @return  void
+     */
+    private function this_user_set(){
+        if ( $this->session->this_user ){
+            $this->this_user = $this->session->this_user;
+            $this->this_view_data['this_user'] = $this->session->this_user;
+        }
     }
     /**
      * 接口结束返回
