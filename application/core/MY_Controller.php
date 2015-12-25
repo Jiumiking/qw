@@ -113,6 +113,21 @@ class P_Controller extends CI_Controller{
         }
     }
     /**
+     * 用户信息更新
+     * @access  protected
+     * @return  bool
+     */
+    protected function this_user_reset(){
+        if ( $this->session->this_user ){
+            $this->load->model('mdl_member');
+            $this_user = $this->mdl_member->my_select($this->session->this_user['id']);
+            if( !empty($this_user) ){
+                $this->session->this_user = $this_user;
+                $this->this_user_set();
+            }
+        }
+    }
+    /**
      * 接口结束返回
      * @access  protected
      * @return  bool

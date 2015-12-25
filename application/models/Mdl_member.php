@@ -13,11 +13,11 @@ class Mdl_member extends MY_Model{
      */
     public function __construct(){
         parent::__construct();
-        $this->my_select_field .= ',name_real,name_nick,password,phone,email,integral,sex';
+        $this->my_select_field .= ',name_real,name_nick,password,phone,email,email_check,integral,sex,birthday';
         $this->my_table = 'member';
     }
     /**
-     * 详情
+     * 详情 by 电话号码 或 邮箱
      * @access  public
      * @param   mixed
      * @return  mixed
@@ -33,6 +33,28 @@ class Mdl_member extends MY_Model{
                 {$this->db->dbprefix($this->my_table)}
             WHERE
                 phone = '$username' OR email = '$username'
+        ";
+        $query = $this->db->query($sql);
+        $data = $query->row_array();
+        return $data;
+    }
+    /**
+     * 详情 by 昵称
+     * @access  public
+     * @param   mixed
+     * @return  mixed
+     */
+    public function my_select_nick( $name_nick, $id = '' ){
+        if( empty( $name_nick ) ){
+            return false;
+        }
+        $sql = "
+            SELECT
+                {$this->my_select_field}
+            FROM
+                {$this->db->dbprefix($this->my_table)}
+            WHERE
+                name_nick = '$name_nick' ".(empty($id)?'':"AND id != $id")."
         ";
         $query = $this->db->query($sql);
         $data = $query->row_array();

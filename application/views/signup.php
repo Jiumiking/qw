@@ -32,11 +32,11 @@
             </div>
             <div id="phone_code_div">
                 <input class="haf" id="phone_code" type="text" maxlength="50" placeholder="短信验证码"/>
-                <input class="haf dab" type="button" id="phone_code_btn" value="获取验证码" onclick="phone_code_get();">
+                <input class="ipt-btn haf dab" type="button" id="phone_code_btn" value="获取验证码" onclick="phone_code_get();">
                 <p id="m_phone_code" class="error-block"></p>
             </div>
             <div>
-                <input id="submit_btn" type="button" value="立即注册" onclick="sign_submit();" />
+                <input class="ipt-btn" id="submit_btn" type="button" value="立即注册" onclick="sign_submit();" />
                 <p id="message" class="error-block"></p>
             </div>
             <div>
@@ -52,8 +52,6 @@
         var phone2 = true;
         var email = true;
         var email2 = true;
-        var password = true;
-        var password2 = true;
         if ( $("#phone_div").css("display") != 'none' ) {
             phone = $("#phone").authen({reg:'mobile',err_name:'手机号码',min_length:2,max_length:50,empty:false});
             if( phone ){

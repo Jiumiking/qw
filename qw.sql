@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : localhost myphp
 Source Server Version : 50540
 Source Host           : localhost:3306
 Source Database       : qw
@@ -10,13 +10,13 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2015-12-22 21:01:12
+Date: 2015-12-25 17:41:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for qi_film
+-- Table structure for `qi_film`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_film`;
 CREATE TABLE `qi_film` (
@@ -53,7 +53,7 @@ INSERT INTO `qi_film` VALUES ('10000', '1', '大话西游之月光宝盒', ' A C
 INSERT INTO `qi_film` VALUES ('10001', '1', '大话西游之大圣娶亲', 'A Chinese Odyssey Part Two - Cinderella', '西游记完结篇仙履奇缘 / 西遊記大結局之仙履奇緣/齐天大圣西游记 / 大话东游之二 / ', '', '2014-10-24', '1995-02-04', '39', '78', '粤语', 'tt0114996', '8.1', '1292213', '9.1', '39dfb9b73a5dd7c3d0db4ef0bfc84951.jpg', 'ee0c1c7bfb5fa35a364974d3478821c9.jpg', 'df641221a5dbb634f0e3a2ebc93240ed.jpg', '', '', '2015-11-27 00:00:00', '2015-11-28 00:00:00', '0');
 
 -- ----------------------------
--- Table structure for qi_film_content
+-- Table structure for `qi_film_content`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_film_content`;
 CREATE TABLE `qi_film_content` (
@@ -70,7 +70,7 @@ INSERT INTO `qi_film_content` VALUES ('1', '10000', '孙悟空（周星驰）护
 INSERT INTO `qi_film_content` VALUES ('2', '10001', '至尊宝（周星驰）被月光宝盒带回到五百年前，遇见紫霞仙子（朱茵），被对方打上烙印成为对方的人，并发觉自己已变成孙悟空。 \n　　紫霞与青霞（朱茵）本是如来佛祖座前日月神灯的灯芯（白天是紫霞，晚上是青霞），二人虽然同一肉身却仇恨颇深，因此紫霞立下誓言，谁能拔出她手中的紫青宝剑，谁就是她的意中人。紫青宝剑被至尊宝于不经意间拔出，紫霞决定以身相许，却遭一心记挂白晶晶（莫文蔚）的至尊宝拒绝。后牛魔王救下迷失在沙漠中的紫霞，并逼紫霞与他成婚，关键时刻，至尊宝现身。');
 
 -- ----------------------------
--- Table structure for qi_goods
+-- Table structure for `qi_goods`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_goods`;
 CREATE TABLE `qi_goods` (
@@ -90,7 +90,7 @@ CREATE TABLE `qi_goods` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for qi_goods_amount
+-- Table structure for `qi_goods_amount`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_goods_amount`;
 CREATE TABLE `qi_goods_amount` (
@@ -109,7 +109,7 @@ CREATE TABLE `qi_goods_amount` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for qi_goods_colour
+-- Table structure for `qi_goods_colour`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_goods_colour`;
 CREATE TABLE `qi_goods_colour` (
@@ -128,7 +128,7 @@ CREATE TABLE `qi_goods_colour` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for qi_goods_detail
+-- Table structure for `qi_goods_detail`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_goods_detail`;
 CREATE TABLE `qi_goods_detail` (
@@ -146,7 +146,7 @@ CREATE TABLE `qi_goods_detail` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for qi_goods_size
+-- Table structure for `qi_goods_size`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_goods_size`;
 CREATE TABLE `qi_goods_size` (
@@ -164,7 +164,7 @@ CREATE TABLE `qi_goods_size` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for qi_goods_type
+-- Table structure for `qi_goods_type`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_goods_type`;
 CREATE TABLE `qi_goods_type` (
@@ -183,7 +183,41 @@ INSERT INTO `qi_goods_type` VALUES ('1', '打底裤', '2015-12-21 20:46:47', '00
 INSERT INTO `qi_goods_type` VALUES ('2', '丝袜', '2015-12-21 20:47:25', '0000-00-00 00:00:00', '1');
 
 -- ----------------------------
--- Table structure for qi_log
+-- Table structure for `qi_jd_goods`
+-- ----------------------------
+DROP TABLE IF EXISTS `qi_jd_goods`;
+CREATE TABLE `qi_jd_goods` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `goods_id` varchar(20) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `date_add` date NOT NULL DEFAULT '0000-00-00',
+  `date_edit` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qi_jd_goods
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `qi_jd_price`
+-- ----------------------------
+DROP TABLE IF EXISTS `qi_jd_price`;
+CREATE TABLE `qi_jd_price` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `goods_id` varchar(20) NOT NULL DEFAULT '0',
+  `price` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qi_jd_price
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `qi_log`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_log`;
 CREATE TABLE `qi_log` (
@@ -193,7 +227,7 @@ CREATE TABLE `qi_log` (
   `ip_address` varchar(32) DEFAULT NULL,
   `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qi_log
@@ -295,32 +329,37 @@ INSERT INTO `qi_log` VALUES ('94', '100', '登录成功', '127.0.0.1', '2015-12-
 INSERT INTO `qi_log` VALUES ('95', '100', '登录成功', '127.0.0.1', '2015-12-21 20:34:13');
 INSERT INTO `qi_log` VALUES ('96', '100', '登录成功', '127.0.0.1', '2015-12-21 22:02:22');
 INSERT INTO `qi_log` VALUES ('97', '100', '登录成功', '127.0.0.1', '2015-12-22 20:19:34');
+INSERT INTO `qi_log` VALUES ('98', '100', '登录成功', '127.0.0.1', '2015-12-23 10:43:30');
+INSERT INTO `qi_log` VALUES ('99', '100', '登录成功', '127.0.0.1', '2015-12-24 10:33:33');
 
 -- ----------------------------
--- Table structure for qi_member
+-- Table structure for `qi_member`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_member`;
 CREATE TABLE `qi_member` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
-  `name_real` varchar(20) DEFAULT NULL,
-  `name_nick` varchar(20) DEFAULT NULL,
+  `name_real` varchar(20) NOT NULL DEFAULT '',
+  `name_nick` varchar(20) NOT NULL DEFAULT '',
   `password` varchar(50) NOT NULL,
-  `phone` int(20) NOT NULL DEFAULT '0',
+  `phone` bigint(20) NOT NULL DEFAULT '0',
   `email` varchar(50) NOT NULL DEFAULT '0',
+  `email_check` tinyint(1) NOT NULL DEFAULT '0',
   `integral` int(20) NOT NULL DEFAULT '0',
   `sex` tinyint(1) NOT NULL DEFAULT '0',
+  `birthday` date NOT NULL DEFAULT '0000-00-00',
   `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qi_member
 -- ----------------------------
+INSERT INTO `qi_member` VALUES ('1', 'jin', '123', 'edbbf7a5afd220a65983229ed6496ed9', '13665119187', '723528197@qq.com', '1', '0', '1', '2015-03-03', '2015-12-23 14:51:03', '2015-12-25 13:13:51', '1');
 
 -- ----------------------------
--- Table structure for qi_member_address
+-- Table structure for `qi_member_address`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_member_address`;
 CREATE TABLE `qi_member_address` (
@@ -343,7 +382,7 @@ CREATE TABLE `qi_member_address` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for qi_menu
+-- Table structure for `qi_menu`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_menu`;
 CREATE TABLE `qi_menu` (
@@ -390,7 +429,7 @@ INSERT INTO `qi_menu` VALUES ('40', '商品管理', 'goods', 'my_list', '39', '1
 INSERT INTO `qi_menu` VALUES ('41', '商品类型', 'goods_type', 'my_list', '39', '1', '3', '0', '1');
 
 -- ----------------------------
--- Table structure for qi_order
+-- Table structure for `qi_order`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_order`;
 CREATE TABLE `qi_order` (
@@ -422,7 +461,7 @@ CREATE TABLE `qi_order` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for qi_order_goods
+-- Table structure for `qi_order_goods`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_order_goods`;
 CREATE TABLE `qi_order_goods` (
@@ -442,7 +481,7 @@ CREATE TABLE `qi_order_goods` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for qi_payment
+-- Table structure for `qi_payment`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_payment`;
 CREATE TABLE `qi_payment` (
@@ -460,7 +499,7 @@ CREATE TABLE `qi_payment` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for qi_role
+-- Table structure for `qi_role`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_role`;
 CREATE TABLE `qi_role` (
@@ -482,7 +521,7 @@ INSERT INTO `qi_role` VALUES ('2', '总管理员', '普通管理员', '0', '0000
 INSERT INTO `qi_role` VALUES ('3', '普通管理员', '普通管理员1', '2', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
 
 -- ----------------------------
--- Table structure for qi_role_access
+-- Table structure for `qi_role_access`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_role_access`;
 CREATE TABLE `qi_role_access` (
@@ -533,7 +572,7 @@ INSERT INTO `qi_role_access` VALUES ('119', '4', '10', '1');
 INSERT INTO `qi_role_access` VALUES ('120', '4', '11', '1');
 
 -- ----------------------------
--- Table structure for qi_role_node
+-- Table structure for `qi_role_node`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_role_node`;
 CREATE TABLE `qi_role_node` (
@@ -558,7 +597,7 @@ INSERT INTO `qi_role_node` VALUES ('5', 'user2', '管理员管理', '4', '5', '0
 INSERT INTO `qi_role_node` VALUES ('6', 'user3', '管理员管理', '5', '6', '0', '1');
 
 -- ----------------------------
--- Table structure for qi_sessions
+-- Table structure for `qi_sessions`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_sessions`;
 CREATE TABLE `qi_sessions` (
@@ -633,7 +672,25 @@ INSERT INTO `qi_sessions` VALUES ('faddd960f857455d8963cd101803d21e', '119.147.1
 INSERT INTO `qi_sessions` VALUES ('fb35521cf19f6106489a2bbe14895e7f', '218.205.17.165', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36', '1449578388', 'a:2:{s:9:\"user_data\";s:0:\"\";s:9:\"this_user\";a:10:{s:2:\"id\";s:3:\"100\";s:4:\"name\";s:5:\"admin\";s:9:\"name_real\";s:9:\"Ming.King\";s:8:\"password\";s:32:\"edbbf7a5afd220a65983229ed6496ed9\";s:5:\"phone\";s:11:\"13665119187\";s:5:\"email\";s:16:\"723528197@qq.com\";s:4:\"role\";s:1:\"1\";s:8:\"date_add\";s:19:\"2015-11-05 00:00:00\";s:14:\"password_times\";s:1:\"0\";s:6:\"status\";s:1:\"1\";}}');
 
 -- ----------------------------
--- Table structure for qi_setting
+-- Table structure for `qi_sessions1`
+-- ----------------------------
+DROP TABLE IF EXISTS `qi_sessions1`;
+CREATE TABLE `qi_sessions1` (
+  `id` varchar(50) NOT NULL DEFAULT '',
+  `ip_address` varchar(50) DEFAULT NULL,
+  `user_agent` varchar(500) DEFAULT NULL,
+  `last_activity` int(20) DEFAULT NULL,
+  `user_data` varchar(500) DEFAULT NULL,
+  `data` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qi_sessions1
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `qi_setting`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_setting`;
 CREATE TABLE `qi_setting` (
@@ -656,7 +713,7 @@ INSERT INTO `qi_setting` VALUES ('user_error_times', '5');
 INSERT INTO `qi_setting` VALUES ('use_captcha', '0');
 
 -- ----------------------------
--- Table structure for qi_tag
+-- Table structure for `qi_tag`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_tag`;
 CREATE TABLE `qi_tag` (
@@ -758,7 +815,7 @@ INSERT INTO `qi_tag` VALUES ('97', '2014', '3', '0');
 INSERT INTO `qi_tag` VALUES ('98', '2015', '3', '0');
 
 -- ----------------------------
--- Table structure for qi_tag_link
+-- Table structure for `qi_tag_link`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_tag_link`;
 CREATE TABLE `qi_tag_link` (
@@ -781,7 +838,7 @@ INSERT INTO `qi_tag_link` VALUES ('70', '10001', '4');
 INSERT INTO `qi_tag_link` VALUES ('71', '10001', '1');
 
 -- ----------------------------
--- Table structure for qi_tag_type
+-- Table structure for `qi_tag_type`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_tag_type`;
 CREATE TABLE `qi_tag_type` (
@@ -798,7 +855,7 @@ INSERT INTO `qi_tag_type` VALUES ('2', '地区');
 INSERT INTO `qi_tag_type` VALUES ('3', '年代');
 
 -- ----------------------------
--- Table structure for qi_user
+-- Table structure for `qi_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_user`;
 CREATE TABLE `qi_user` (
@@ -824,7 +881,7 @@ INSERT INTO `qi_user` VALUES ('102', 'jojo', 'jojo1', 'edbbf7a5afd220a65983229ed
 INSERT INTO `qi_user` VALUES ('103', 'fan', 'fan1', 'edbbf7a5afd220a65983229ed6496ed9', '', '', '2', '2015-12-08 10:11:57', '2015-12-08 18:07:53', '0', '1');
 
 -- ----------------------------
--- Table structure for qi_worker
+-- Table structure for `qi_worker`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_worker`;
 CREATE TABLE `qi_worker` (
@@ -854,7 +911,7 @@ CREATE TABLE `qi_worker` (
 INSERT INTO `qi_worker` VALUES ('10000', '周星驰', 'Stephen Chow', '', '1', '1', '1', '1', '1', '巨蟹座', '1962-06-22', '香港', '39', 'nm0159507', '7dcc1b44d5346b8ec576a87d08929364.jpg', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- ----------------------------
--- Table structure for qi_worker_content
+-- Table structure for `qi_worker_content`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_worker_content`;
 CREATE TABLE `qi_worker_content` (
@@ -870,7 +927,7 @@ CREATE TABLE `qi_worker_content` (
 INSERT INTO `qi_worker_content` VALUES ('2', '10000', '周星驰（1962年6月22日— ），生于香港，英文名Stephen Chow，著名演员，兼导演、编剧、电影监制以及电影制作人。曾主演《九品芝麻官》、《长江七号》等多部喜剧影片。捧红过张柏芝、张雨绮等影星。曾获1998年国际杰人会港澳杰人之星奖。其与成龙和周润发并称“双周一成”，意为香港电影票房的保证。');
 
 -- ----------------------------
--- Table structure for qi_worker_link
+-- Table structure for `qi_worker_link`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_worker_link`;
 CREATE TABLE `qi_worker_link` (

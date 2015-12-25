@@ -22,7 +22,7 @@
                 <p id="m_verification_code" class="error-block"></p>
             </div>
             <div>
-                <input id="submit_btn" type="button" value="登录" onclick="sign_submit();" />
+                <input class="ipt-btn" id="submit_btn" type="button" value="登录" onclick="sign_submit();" />
                 <p id="message" class="error-block"></p>
             </div>
             <div>
