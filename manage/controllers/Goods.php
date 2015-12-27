@@ -15,9 +15,10 @@ class Goods extends MY_Controller{
     public function __construct(){
         parent::__construct();
         $this->_views['_js'][] = 'datepicker/WdatePicker';
+        $this->load->model('mdl_goods');
         $this->load->model('mdl_goods_type');
         $this->load->library('upload');
-        $this->_views['data_goods_type'] = $this->mdl_goods_type->my_selects( 0, 0 );
+        $this->_views['data_goods_type'] = $this->mdl_goods_type->my_selects();
     }
     /**
      * 编辑ajax
@@ -28,6 +29,9 @@ class Goods extends MY_Controller{
     public function my_edit(){
         if( !empty($_GET['id']) ){
             $this->_views['data'] = $this->{$this->this_model}->my_select( $_GET['id'] );
+            $this->_views['data_detail'] = $this->mdl_goods->detail_get( $_GET['id'] );
+            $this->_views['data_size'] = $this->mdl_goods->size_get( $_GET['id'] );
+            $this->_views['data_colour'] = $this->mdl_goods->colour_get( $_GET['id'] );
         }
         $this->ajax_views['dat'] = $this->load->view( $this->this_controller.'/'.$this->this_controller.'_edit', $this->_views, true );
         $this->ajax_views['sta'] = '1';
@@ -40,33 +44,117 @@ class Goods extends MY_Controller{
      * @param   mixed
      * @return  mixed
      */
-    public function my_edit_do(){echo '<pre>';print_r($_POST);exit;
-        $data=$_POST;
-        $content = $data['content'];
-        $tag1 = $data['tag1'];
-        unset($data['content']);
-        unset($data['tag1']);
-        if( !empty($data['id']) ){
-            $data['date_edit'] = date('Ymd');
-            $back = $this->{$this->this_model}->my_update( $data['id'],$data ); //更新
-            $id = $data['id'];
+    public function my_edit_do(){
+        //echo '<pre>';print_r($_POST);exit;
+        $id = empty($_POST['id'])?0:$_POST['id'];
+
+        $data_goods['status'] = empty($_POST['status'])?1:$_POST['status'];
+        $data_goods['type'] = empty($_POST['type'])?0:$_POST['type'];
+        $data_goods['name'] = empty($_POST['name'])?'':$_POST['name'];
+        $data_goods['money'] = empty($_POST['money'])?0:$_POST['money'];
+        if( empty($data_goods['type']) || empty($data_goods['name']) || empty($data_goods['money']) ){
+            $this->ajax_views['msg'] = '参数错误';
+            $this->ajax_end();
+        }
+
+        $data_detail = empty($_POST['detail'])?0:$_POST['detail'];
+        $data_size = empty($_POST['size'])?'':$_POST['size'];
+        $data_colour = empty($_POST['colour'])?'':$_POST['colour'];
+
+        if( !empty($id) ){
+            $back = $this->{$this->this_model}->my_update( $id,$data_goods ); //更新
         }else{
-            $data['date_add'] = date('Ymd');
-            $back = $this->{$this->this_model}->my_insert( $data ); //新插入
+            $data_goods['number'] = 'g'.time();
+            $data_goods['date_status'] = date('Y-m-d H:i:s');
+            $back = $this->{$this->this_model}->my_insert( $data_goods ); //新插入
             $id = $this->db->insert_id();
         }
         if($back){
-            $this->{$this->this_model}->content_edit( $id, $content ); //保存简介
-            $this->mdl_tag->tag_link_edit( $id, $tag1 ); //保存类型标签
-            for( $i=0; $i<5; $i++ ){
-                $photo = $this->film_photo_save( $id, $i );
-                if( $photo ){
-                    $photos['photo'.(string)$i] = $photo;
-                }
-            }
-            if( !empty($photos) ){
-                $this->{$this->this_model}->my_update( $id, $photos ); //保存图片名称
-            }
+            $this->{$this->this_model}->detail_edit( $id, $data_detail ); //保存简介
+            $this->{$this->this_model}->size_edit( $id, $data_size ); //保存尺寸
+            $this->{$this->this_model}->colour_edit( $id, $data_colour ); //保存颜色
+            
+            $this->ajax_views['sta'] = '1';
+            $this->ajax_views['msg'] = '操作成功';
+        }
+        $this->ajax_end();
+    }
+    /**
+     * 上架/下架ajax
+     * @access  public
+     * @return  void
+     */
+    public function status_edit(){
+        if( empty($_GET['id']) || empty($_GET['status']) ){
+            $this->ajax_views['msg'] = '参数错误';
+            $this->ajax_end();
+        }
+        $data['status'] = $_GET['status'];
+        $data['date_status'] = date('Y-m-d H:i:s');
+        if( $this->mdl_goods->my_update( $_GET['id'], $data) ){
+            $this->ajax_views['status'] = '1';
+            $this->ajax_views['msg'] = '操作成功';
+        }else{
+            $this->ajax_views['msg'] = '操作失败';
+        }
+        $this->ajax_end();
+    }
+    /**
+     * 库存ajax
+     * @access  public
+     * @param   mixed
+     * @return  mixed
+     */
+    public function amount(){
+        if( !empty($_GET['id']) ){
+            $this->_views['id'] = $_GET['id'];
+            $this->_views['data_amount'] = $this->mdl_goods->amount_get( $_GET['id'] );
+            $this->_views['data_size'] = $this->mdl_goods->size_get( $_GET['id'] );
+            $this->_views['data_colour'] = $this->mdl_goods->colour_get( $_GET['id'] );
+            $this->ajax_views['dat'] = $this->load->view( $this->this_controller.'/'.$this->this_controller.'_amount', $this->_views, true );
+            $this->ajax_views['sta'] = '1';
+            $this->ajax_views['msg'] = '获取成功';
+        }else{
+            $this->ajax_views['msg'] = '参数错误';
+        }
+        $this->ajax_end();
+    }
+    /**
+     * 库存执行ajax
+     * @access  public
+     * @param   mixed
+     * @return  mixed
+     */
+    public function amount_do(){
+        //echo '<pre>';print_r($_POST);exit;
+        $id = empty($_POST['id'])?0:$_POST['id'];
+
+        $data_goods['status'] = empty($_POST['status'])?1:$_POST['status'];
+        $data_goods['type'] = empty($_POST['type'])?0:$_POST['type'];
+        $data_goods['name'] = empty($_POST['name'])?'':$_POST['name'];
+        $data_goods['money'] = empty($_POST['money'])?0:$_POST['money'];
+        if( empty($data_goods['type']) || empty($data_goods['name']) || empty($data_goods['money']) ){
+            $this->ajax_views['msg'] = '参数错误';
+            $this->ajax_end();
+        }
+
+        $data_detail = empty($_POST['detail'])?0:$_POST['detail'];
+        $data_size = empty($_POST['size'])?'':$_POST['size'];
+        $data_colour = empty($_POST['colour'])?'':$_POST['colour'];
+
+        if( !empty($id) ){
+            $back = $this->{$this->this_model}->my_update( $id,$data_goods ); //更新
+        }else{
+            $data_goods['number'] = 'g'.time();
+            $data_goods['date_status'] = date('Y-m-d H:i:s');
+            $back = $this->{$this->this_model}->my_insert( $data_goods ); //新插入
+            $id = $this->db->insert_id();
+        }
+        if($back){
+            $this->{$this->this_model}->detail_edit( $id, $data_detail ); //保存简介
+            $this->{$this->this_model}->size_edit( $id, $data_size ); //保存尺寸
+            $this->{$this->this_model}->colour_edit( $id, $data_colour ); //保存颜色
+            
             $this->ajax_views['sta'] = '1';
             $this->ajax_views['msg'] = '操作成功';
         }
