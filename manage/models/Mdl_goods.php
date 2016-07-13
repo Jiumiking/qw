@@ -13,7 +13,7 @@ class Mdl_goods extends MY_Model{
      */
     public function __construct(){
         parent::__construct();
-        $this->my_select_field .= ',number,name,money,type,date_status';
+        $this->my_select_field .= ',goods_no,name,money_in,money_out,type_id,date_add,date_edit,date_status,status';
         $this->my_table = 'goods';
     }
     /**
@@ -28,11 +28,11 @@ class Mdl_goods extends MY_Model{
         }
         $sql = "
             SELECT
-                id,goods,detail
+                id,goods_id,detail
             FROM
                 {$this->db->dbprefix('goods_detail')}
             WHERE
-                goods = '$id'
+                goods_id = '$id'
         ";
         $query = $this->db->query($sql);
         $data = $query->row_array();
@@ -50,95 +50,76 @@ class Mdl_goods extends MY_Model{
         }
         $date = $this->detail_get( $id );
         if( $date ){
-            return $this->db->update( 'goods_detail', array('detail'=>$detail, 'date_edit'=>date('Y-m-d H:i:s')), array('goods' => $id) );
+            return $this->db->update( 'goods_detail', array('detail'=>$detail, 'date_edit'=>date('Y-m-d H:i:s')), array('goods_id' => $id) );
         }else{
-            return $this->db->insert( 'goods_detail', array( 'goods'=>$id, 'detail'=>$detail, 'date_add'=>date('Y-m-d H:i:s') ) );
+            return $this->db->insert( 'goods_detail', array( 'goods_id'=>$id, 'detail'=>$detail, 'date_add'=>date('Y-m-d H:i:s') ) );
         }
     }
     /**
-     * 尺寸获取 by goods_id
+     * 规格库存获取 by goods_id
      * @access  public
      * @param   mixed
      * @return  mixed
      */
-    public function size_get( $id ){
+    public function amount_get( $id ){
         if( empty($id) ){
             return false;
         }
         $sql = "
             SELECT
-                id,goods,name
+                id,goods_id,format1,format2,format3,format4,format5,format1_remark,format2_remark,format3_remark,format4_remark,format5_remark,amount,money
             FROM
-                {$this->db->dbprefix('goods_size')}
+                {$this->db->dbprefix('goods_amount')}
             WHERE
-                goods = '$id'
+                goods_id = '$id'
         ";
         $query = $this->db->query($sql);
         $data = $query->result_array();
         return $data;
     }
     /**
-     * 尺寸更新
+     * 规格库存
      * @access  public
      * @param   mixed
      * @return  mixed
      */
-    public function size_edit( $id, $data ){
+    public function amount_adds( $id, $data ){
         if( empty($id) ){
             return false;
         }
-        $this->db->delete( 'goods_size', array('goods'=>$id) );
         foreach( $data as $key=>$value ){
-            if( !empty($value['name']) ){
-                $data_insert = $value;
-                $data_insert['goods'] = $id;
+            $data_insert = $value;
+            $data_insert['goods_id'] = $id;
+            if( empty($value['id']) ){
+                unset($data_insert['id']);
                 $data_insert['date_add'] = date('Y-m-d H:i:s');
-                $this->db->insert( 'goods_size', $data_insert );
+                $this->amount_add( $data_insert );
+            }else{
+                $data_insert['date_edit'] = date('Y-m-d H:i:s');
+                $this->amount_edit( $value['id'],$data_insert );
             }
         }
         return true;
     }
     /**
-     * 颜色获取 by goods_id
+     * 规格库存 新增
      * @access  public
      * @param   mixed
      * @return  mixed
      */
-    public function colour_get( $id ){
-        if( empty($id) ){
-            return false;
-        }
-        $sql = "
-            SELECT
-                id,goods,name,money
-            FROM
-                {$this->db->dbprefix('goods_colour')}
-            WHERE
-                goods = '$id'
-        ";
-        $query = $this->db->query($sql);
-        $data = $query->result_array();
-        return $data;
+    public function amount_add( $data ){
+        return $this->db->insert( 'goods_amount', $data );
     }
     /**
-     * 颜色更新
+     * 规格库存 更新
      * @access  public
      * @param   mixed
      * @return  mixed
      */
-    public function colour_edit( $id, $data ){
+    public function amount_edit( $id, $data ){
         if( empty($id) ){
             return false;
         }
-        $this->db->delete( 'goods_colour', array('goods'=>$id) );
-        foreach( $data as $key=>$value ){
-            if( !empty($value['name']) ){
-                $data_insert = $value;
-                $data_insert['goods'] = $id;
-                $data_insert['date_add'] = date('Y-m-d H:i:s');
-                $this->db->insert( 'goods_colour', $data_insert );
-            }
-        }
-        return true;
+        return $this->db->update( 'goods_amount', $data, array('id'=>$id) );
     }
 }

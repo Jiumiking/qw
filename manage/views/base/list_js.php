@@ -10,6 +10,27 @@ pagelist.pageCallback = function(data){
     $("#pg_count").html(data.count);
     pagelist.pageCount = data.page_count;
 }
+//查看
+function show( id ){
+    $.ajax({
+        type : "GET",
+        async : false,
+        url : "<?php echo site_url($this_controller.'/my_show');?>",
+        data : { id:id },
+        success : function(msg){
+            if(msg){
+                var msgobj = eval("("+ msg +")");
+                if(msgobj.sta == '1'){
+                    $('#div_show').html(msgobj.dat);
+                    $('#div_show').show();
+                    $('#div_content').hide();
+                }else{
+                    alert(msgobj.msg);
+                }
+            }
+        }
+    });
+}
 //新增、编辑
 function edit( id ){
     $.ajax({

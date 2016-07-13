@@ -14,12 +14,11 @@ class Order extends MY_Controller{
      */
     public function __construct(){
         parent::__construct();
-        $this->_views['_js'][] = 'datepicker/WdatePicker';
-        $this->load->model('mdl_tag');
-        $this->load->library('upload');
-        $this->_views['data_tag_1'] = $this->mdl_tag->my_selects( 0, 0, array('type'=>'1') );
-        $this->_views['data_tag_2'] = $this->mdl_tag->my_selects( 0, 0, array('type'=>'2') );
-        $this->_views['data_tag_3'] = $this->mdl_tag->my_selects( 0, 0, array('type'=>'3') );
+        $this->load->model('mdl_order_goods');
+        $this->load->model('mdl_shipping');
+        $this->load->model('mdl_payment');
+        $this->_views['data_shipping'] = $this->mdl_shipping->my_selects();
+        $this->_views['data_payment'] = $this->mdl_payment->my_selects();echo '<pre>';print_r($this->config->item('status_order','2'));exit;
     }
     /**
      * 编辑ajax
@@ -31,8 +30,7 @@ class Order extends MY_Controller{
         if( !empty($_GET['id']) ){
             $this->_views['data'] = $this->{$this->this_model}->my_select( $_GET['id'] );
         }
-        $this->_views['data_tag_link'] = $this->mdl_tag->tag_link_get( $_GET['id'] );
-        $this->_views['data_content'] = $this->{$this->this_model}->content_get( $_GET['id'] );
+        $this->_views['data_goods'] = $this->mdl_order_goods->my_selects( 0,0,array('order_id'=>$_GET['id']) );
         $this->ajax_views['dat'] = $this->load->view( $this->this_controller.'/'.$this->this_controller.'_edit', $this->_views, true );
         $this->ajax_views['sta'] = '1';
         $this->ajax_views['msg'] = '获取成功';
@@ -75,40 +73,5 @@ class Order extends MY_Controller{
             $this->ajax_views['msg'] = '操作成功';
         }
         $this->ajax_end();
-    }
-    /**
-     * 保存图片
-     * @access  protected
-     * @param   mixed
-     * @return  mixed
-     */
-    protected function film_photo_save( $id, $num ){
-        if( empty($id) || !isset($num) ){
-            return false;
-        }
-        if(!empty($_FILES['photo'.(string)$num])){
-            $upload_path = $this->config->item('upload_path');
-            $config['upload_path'] = $upload_path.'film/'.$id.'/'.(string)$num.'/';
-            if ( !file_exists( $config['upload_path'] ) ) {
-                if ( !mkdir( $config['upload_path'] , 0777 , true ) || !chmod($config['upload_path'], 0777) ) {
-                    return false;
-                }
-            }
-            $config['allowed_types'] = $this->config->item('upload_pic_allowed_types');
-            //$config['max_size'] = $this->config->item('upload_pic_max_size');
-            //$config['max_width'] = $this->config->item('upload_pic_max_width');
-            //$config['max_height'] = $this->config->item('upload_pic_max_height');
-            $config['encrypt_name'] = $this->config->item('upload_pic_encrypt_name');
-            $this->upload->initialize($config);
-            if ( @($this->upload->do_upload('photo'.(string)$num)) ){ //保存图片
-                $upload_back = $this->upload->data();
-                $photo = $upload_back['file_name']; //上传后的文件名
-                dele_file( $config['upload_path'],array($photo));
-            }else{
-                return false;
-            }
-            return $photo;
-        }
-        return false;
     }
 }

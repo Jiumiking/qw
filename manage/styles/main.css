@@ -33,12 +33,13 @@ body{background:none;}
 .main .cont .public_form label{color:#072738; margin-right:15px;}
 .main .cont .public_form input[type="text"]{height:16px; padding:2px; border:1px solid #d2d3d5; margin-left:5px;}
 .main .cont .public_form input[type="text"]:focus{ border:1px solid #88bdcd;}
+.main .cont .public_form select{height:21px;}
 
 .main .cont .public_table{border:1px solid #E8E8E7; width:100%;margin-top: 10px;}
 .main .cont .public_table caption{border:1px solid #c7c7c6; border-bottom:0; padding:10px;}
 .main .cont .public_table caption h2{color:#381307;}
 .main .cont .public_table caption .icon_custom{width:97px; height:26px; display:inline-block;}
-.main .cont .public_table th{background-color:#caeded; padding:0 6px; height:38px; line-height:38px; border-right:1px solid #E8E8E7; border-bottom:1px solid #E8E8E7; color:#072738;}
+.main .cont .public_table th{background-color:#caeded; padding:0 6px; height:38px; line-height:38px; border-right:1px solid #E8E8E7; border-bottom:1px solid #E8E8E7; color:#072738;text-align: left;}
 .main .cont .public_table th a{color: #740d01!important;}
     
 .main .cont .public_table td{border-right:1px solid #E8E8E7; border-bottom:1px solid #E8E8E7; padding:0 6px; height:35px; line-height:35px; color:#072738;}
@@ -231,3 +232,15 @@ tr td.addsome_205 {
 
 /*报错提示*/
 .error-block { color: red; margin-left: 10px; }
+
+.mr50 {margin-right:50px;}
+.mb10 {margin-bottom:10px}
+.color-box {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    margin: 0 3px;
+    position: relative;
+    top: 3px;
+    border: 1px solid #ddd;
+}

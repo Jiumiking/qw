@@ -11,6 +11,7 @@
             <tr>
                 <th>ID</th>
                 <th>类型名称</th>
+                <th>规格</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -19,7 +20,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3">
+                <td colspan="4">
                     当前<input type="text" onkeypress="pagelist.changePage(event,this)" id="pg_page" maxlength="10" size="1" value="1" />页,共<span id="pg_page_count"><?php echo $pages['page_count']?></span>页，<span 
                     id="pg_count"><?php echo $pages['count']?></span>条记录
                     <a href="javascript:pagelist.lastPage();">上一页</a>

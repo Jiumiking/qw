@@ -5,15 +5,14 @@
 <div id="div_content">
     <div class="public_form mb10 mw980">
         <select name="filter">
-            <option value="card_no">卡号</option>
+            <option value="phone">手机号码</option>
+            <option value="email">邮箱</option>
+            <option value="weixin">微信</option>
+            <option value="qq">QQ</option>
+            <option value="name_real">姓名</option>
+            <option value="name_nick">昵称</option>
         </select>
         <input type="text" name="value" value="">&nbsp;&nbsp;
-        <select name="status">
-            <option value="">状态</option>
-            <option value="1">激活</option>
-            <option value="2">锁定</option>
-            <option value="3">注销</option>
-        </select>
         <input type="button" name="search" value="搜索">
         <input class="add" type="button" value=" + 新增" onclick="edit('')">
     </div>
@@ -22,7 +21,7 @@
             <tr>
                 <th>姓名</th>
                 <th>昵称</th>
-                <th>手机</th>
+                <th>手机号码</th>
                 <th>邮箱</th>
                 <th>性别</th>
                 <th>积分</th>
@@ -50,12 +49,11 @@
 <script type="text/javascript">
 //编辑验证函数
 function edit_authen(){
-    var name_ch = $("#name_ch").authen({reg:'nickname',err_name:'中文名称',min_length:2,max_length:50,empty:false});
-    var name_en = $("#name_en").authen({err_name:'英文名称',min_length:2,max_length:50,empty:true});
-    var name_other = $("#name_other").authen({err_name:'其他名称',min_length:2,max_length:200,empty:true});
-    var place = $("#place").authen({err_name:'地区',empty:false});
-    var language = $("#language").authen({err_name:'地区',empty:false});
-    var back = name_ch && name_en && name_other && place && language;
+    var name_real = $("#name_real").authen({reg:'nickname',err_name:'名称',min_length:1,max_length:50,empty:false});
+    var name_nick = $("#name_nick").authen({reg:'nickname',err_name:'昵称',min_length:1,max_length:50,empty:false});
+    var phone = $("#phone").authen({reg:'mobile',err_name:'手机号码',empty:false});
+    var email = $("#email").authen({reg:'email',err_name:'邮箱',empty:true});
+    var back = name_real && name_nick && phone && email;
     return back;
 }
 $(document).ready(function(){
@@ -63,11 +61,8 @@ $(document).ready(function(){
     $("[name='search']").click(function(){
         var filter = $("[name='filter']").val();
         var value = $("[name='value']").val();
-        var type = $("[name='type']").val();
-
-        pagelist.filter['name'] = undefined;
+        pagelist.filter['page'] = 1;
         pagelist.filter[filter] = value;
-        pagelist.filter['type'] = type;
         pagelist.loadPage();
     });
 });

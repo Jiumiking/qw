@@ -1,12 +1,12 @@
 <?php if(!empty($data)){ ?>
 <?php foreach($data as $info){ ?>
 <tr>
-    <td><?php echo $info['number']; ?></td>
+    <td><?php echo $info['goods_no']; ?></td>
     <td><?php echo $info['name']; ?></td>
     <td>
     <?php if(!empty($data_goods_type)){
     foreach( $data_goods_type as $v ){
-        if( $v['id'] == $info['type'] ){
+        if( $v['id'] == $info['type_id'] ){
             echo $v['name'];
         }
     }

@@ -163,6 +163,21 @@
         $this->ajax_end();
     }
     /**
+     * 查看ajax
+     * @access  protected
+     * @param   mixed
+     * @return  mixed
+     */
+    public function my_show(){
+        if( !empty($_GET['id']) ){
+            $this->_views['data'] = $this->{$this->this_model}->my_select( $_GET['id'] );
+        }
+        $this->ajax_views['dat'] = $this->load->view( $this->this_controller.'/'.$this->this_controller.'_show', $this->_views, true );
+        $this->ajax_views['sta'] = '1';
+        $this->ajax_views['msg'] = '获取成功';
+        $this->ajax_end();
+    }
+    /**
      * 编辑ajax
      * @access  protected
      * @param   mixed

@@ -14,5 +14,7 @@ class Goods_type extends MY_Controller{
      */
     public function __construct(){
         parent::__construct();
+        $this->load->model('mdl_format');
+        $this->_views['data_format'] = $this->mdl_format->my_selects();
     }
 }

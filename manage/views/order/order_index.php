@@ -5,17 +5,28 @@
 <div id="div_content">
     <div class="public_form mb10 mw980">
         <select name="filter">
-            <option value="card_no">卡号</option>
+            <option value="order_no">订单号</option>
+            <option value="phone">手机号码</option>
+            <option value="email">邮箱</option>
+            <option value="name_real">姓名</option>
+            <option value="name_nick">昵称</option>
+            <option value="accept_name">联系人</option>
+            <option value="accept_phone">联系电话</option>
         </select>
         <input type="text" name="value" value="">&nbsp;&nbsp;
-        <select name="status">
-            <option value="">状态</option>
-            <option value="1">激活</option>
-            <option value="2">锁定</option>
-            <option value="3">注销</option>
+        <select name="shipping_id">
+            <option value="">配送方式</option>
+            <?php if(!empty($data_shipping)){foreach($data_shipping as $k=>$v){ ?>
+            <option value="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></option>
+            <?php }} ?>
+        </select>
+        <select name="payment_id">
+            <option value="">支付方式</option>
+            <?php if(!empty($data_payment)){foreach($data_payment as $k=>$v){ ?>
+            <option value="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></option>
+            <?php }} ?>
         </select>
         <input type="button" name="search" value="搜索">
-        <input class="add" type="button" value=" + 新增" onclick="edit('')">
     </div>
     <table class="public_table mw1000">
         <thead>
@@ -24,6 +35,7 @@
                 <th>会员</th>
                 <th>总价</th>
                 <th>支付方式</th>
+                <th>配送方式</th>
                 <th>收货人</th>
                 <th>城市</th>
                 <th>状态</th>
@@ -36,7 +48,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="9">
+                <td colspan="10">
                     当前<input type="text" onkeypress="pagelist.changePage(event,this)" id="pg_page" maxlength="10" size="1" value="1" />页,共<span id="pg_page_count"><?php echo $pages['page_count']?></span>页，<span 
                     id="pg_count"><?php echo $pages['count']?></span>条记录
                     <a href="javascript:pagelist.lastPage();">上一页</a>
@@ -64,11 +76,13 @@ $(document).ready(function(){
     $("[name='search']").click(function(){
         var filter = $("[name='filter']").val();
         var value = $("[name='value']").val();
-        var type = $("[name='type']").val();
+        var shipping_id = $("[name='shipping_id']").val();
+        var payment_id = $("[name='payment_id']").val();
 
-        pagelist.filter['name'] = undefined;
+        pagelist.filter['page'] = 1;
         pagelist.filter[filter] = value;
-        pagelist.filter['type'] = type;
+        pagelist.filter['shipping_id'] = shipping_id;
+        pagelist.filter['payment_id'] = payment_id;
         pagelist.loadPage();
     });
 });

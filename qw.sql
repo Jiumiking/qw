@@ -10,10 +10,30 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2015-12-25 17:41:53
+Date: 2016-07-01 09:40:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `qi_brand`
+-- ----------------------------
+DROP TABLE IF EXISTS `qi_brand`;
+CREATE TABLE `qi_brand` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `remark` varchar(200) DEFAULT NULL,
+  `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qi_brand
+-- ----------------------------
+INSERT INTO `qi_brand` VALUES ('1', '苹果', '乔布斯的苹果', '2016-05-16 11:01:13', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_brand` VALUES ('2', '小米', '雷军的小米', '2016-05-16 11:01:59', '0000-00-00 00:00:00', '1');
 
 -- ----------------------------
 -- Table structure for `qi_film`
@@ -70,24 +90,132 @@ INSERT INTO `qi_film_content` VALUES ('1', '10000', '孙悟空（周星驰）护
 INSERT INTO `qi_film_content` VALUES ('2', '10001', '至尊宝（周星驰）被月光宝盒带回到五百年前，遇见紫霞仙子（朱茵），被对方打上烙印成为对方的人，并发觉自己已变成孙悟空。 \n　　紫霞与青霞（朱茵）本是如来佛祖座前日月神灯的灯芯（白天是紫霞，晚上是青霞），二人虽然同一肉身却仇恨颇深，因此紫霞立下誓言，谁能拔出她手中的紫青宝剑，谁就是她的意中人。紫青宝剑被至尊宝于不经意间拔出，紫霞决定以身相许，却遭一心记挂白晶晶（莫文蔚）的至尊宝拒绝。后牛魔王救下迷失在沙漠中的紫霞，并逼紫霞与他成婚，关键时刻，至尊宝现身。');
 
 -- ----------------------------
+-- Table structure for `qi_format`
+-- ----------------------------
+DROP TABLE IF EXISTS `qi_format`;
+CREATE TABLE `qi_format` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `remark` varchar(200) DEFAULT NULL,
+  `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qi_format
+-- ----------------------------
+INSERT INTO `qi_format` VALUES ('1', '颜色', '保留规格', '2016-05-16 15:00:57', '2016-05-17 09:51:34', '1');
+INSERT INTO `qi_format` VALUES ('2', '尺寸', '1', '2016-05-17 09:47:45', '2016-06-17 15:33:27', '1');
+INSERT INTO `qi_format` VALUES ('3', '内存', '', '2016-05-17 10:13:28', '2016-06-17 10:00:12', '1');
+
+-- ----------------------------
+-- Table structure for `qi_format_value`
+-- ----------------------------
+DROP TABLE IF EXISTS `qi_format_value`;
+CREATE TABLE `qi_format_value` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `remark` varchar(20) DEFAULT NULL,
+  `format_id` int(20) NOT NULL DEFAULT '0',
+  `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qi_format_value
+-- ----------------------------
+INSERT INTO `qi_format_value` VALUES ('1', '乳白色', '255,251,240', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('2', '白色', '255,255,255', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('3', '米白色', '238,222,176', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('4', '浅灰色', '228,228,228', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('5', '深灰色', '102,102,102', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('6', '灰色', '128,128,128', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('7', '银色', '192,192,192', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('8', '黑色', '0,0,0', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('9', '桔红色', '255,117,0', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('10', '玫红色', '223,27,118', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('11', '粉红色', '255,182,193', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('12', '红色', '255,0,0', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('13', '藕色', '238,208,216', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('14', '西瓜红', '240,86,84', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('15', '酒红色', '153,0,0', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('16', '卡其色', '195,176,145', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('17', '姜黄色', '255,199,115', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('18', '明黄色', '255,255,1', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('19', '杏色', '247,238,214', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('20', '柠檬黄', '255, 236, 67', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('21', '桔色', '255,165,0', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('22', '浅黄色', '250,255,114', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('23', '荧光黄', '234,255,86', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('24', '金色', '255,215,0', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('25', '香槟色', '255,249,177', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('26', '黄色', '255,255,0', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('27', '军绿色', '93,118,42', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('28', '墨绿色', '66,204,33', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('29', '浅绿色', '152,251,152', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('30', '绿色', '0,128,0', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('31', '翠绿色', '10,163,68', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('32', '荧光绿', '35,250,7', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('33', '青色', '0,224,158', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('34', '天蓝色', '68,206,246', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('35', '孔雀蓝', '0,164,197', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('36', '宝蓝色', '75,92,196', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('37', '浅蓝色', '210,240,244', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('38', '深蓝色', '4,22,144', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('39', '湖蓝色', '48,223,243', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('40', '蓝色', '0,0,254', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('41', '藏青色', '46,78,126', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('42', '浅紫色', '237,224,230', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('43', '深紫色', '67,6,83', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('44', '紫红色', '139,0,98', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('45', '紫罗兰', '183,172,228', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('46', '紫色', '128,0,128', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('47', '咖啡色', '96,57,18', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('48', '巧克力色', '96,57,18', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('49', '栗色', '96,40,30', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('50', '浅棕色', '179,92,68', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('51', '深卡其布色', '189,183,107', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('52', '深棕色', '124,75,0', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('53', '褐色', '133,91,0', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('54', '驼色', '168,132,98', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('55', '花色', '255,255,255', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('56', '透明', '255,255,255', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('57', 'S', null, '2', '2016-06-17 09:59:39', '2016-06-17 15:33:27', '1');
+INSERT INTO `qi_format_value` VALUES ('58', 'M', null, '2', '2016-06-17 09:59:52', '2016-06-17 15:33:27', '1');
+INSERT INTO `qi_format_value` VALUES ('59', 'L', null, '2', '2016-06-17 09:59:52', '2016-06-17 15:33:27', '1');
+INSERT INTO `qi_format_value` VALUES ('60', 'XL', null, '2', '2016-06-17 09:59:52', '2016-06-17 15:33:27', '1');
+INSERT INTO `qi_format_value` VALUES ('61', '1G', null, '3', '2016-06-17 10:00:12', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('62', '2G', null, '3', '2016-06-17 10:00:12', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('63', '4G', null, '3', '2016-06-17 10:00:12', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('64', '8G', null, '3', '2016-06-17 10:00:12', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_format_value` VALUES ('65', '均码', null, '2', '2016-06-17 15:33:27', '0000-00-00 00:00:00', '1');
+
+-- ----------------------------
 -- Table structure for `qi_goods`
 -- ----------------------------
 DROP TABLE IF EXISTS `qi_goods`;
 CREATE TABLE `qi_goods` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
-  `number` int(20) NOT NULL DEFAULT '0',
   `name` varchar(100) NOT NULL DEFAULT '',
-  `type` int(20) NOT NULL DEFAULT '0',
-  `money` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `goods_no` varchar(50) NOT NULL DEFAULT '0',
+  `type_id` int(20) NOT NULL DEFAULT '0',
+  `money_in` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `money_out` decimal(10,2) NOT NULL DEFAULT '0.00',
   `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1上架2下架',
+  `date_status` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(1) NOT NULL DEFAULT '2' COMMENT '1上架2下架',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qi_goods
 -- ----------------------------
+INSERT INTO `qi_goods` VALUES ('1', '丝袜10', 'g1231231231', '2', '10.00', '15.00', '2016-06-21 16:39:05', '2016-06-27 10:33:06', '2016-06-21 16:40:48', '1');
 
 -- ----------------------------
 -- Table structure for `qi_goods_amount`
@@ -95,37 +223,34 @@ CREATE TABLE `qi_goods` (
 DROP TABLE IF EXISTS `qi_goods_amount`;
 CREATE TABLE `qi_goods_amount` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
-  `size` int(20) NOT NULL DEFAULT '0',
-  `colour` int(20) NOT NULL DEFAULT '0',
-  `amount` int(20) NOT NULL DEFAULT '0',
+  `goods_id` int(20) NOT NULL DEFAULT '0',
+  `format1` int(20) NOT NULL DEFAULT '0',
+  `format2` int(20) NOT NULL DEFAULT '0',
+  `format3` int(20) NOT NULL DEFAULT '0',
+  `format4` int(20) NOT NULL DEFAULT '0',
+  `format5` int(20) NOT NULL DEFAULT '0',
+  `format1_remark` varchar(20) DEFAULT NULL,
+  `format2_remark` varchar(20) DEFAULT NULL,
+  `format3_remark` varchar(20) DEFAULT NULL,
+  `format4_remark` varchar(20) DEFAULT NULL,
+  `format5_remark` varchar(20) DEFAULT NULL,
+  `amount` int(20) NOT NULL,
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00',
   `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qi_goods_amount
 -- ----------------------------
-
--- ----------------------------
--- Table structure for `qi_goods_colour`
--- ----------------------------
-DROP TABLE IF EXISTS `qi_goods_colour`;
-CREATE TABLE `qi_goods_colour` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL DEFAULT '',
-  `goods` int(20) NOT NULL DEFAULT '0',
-  `money` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of qi_goods_colour
--- ----------------------------
+INSERT INTO `qi_goods_amount` VALUES ('1', '1', '8', '57', '0', '0', '0', null, null, null, null, null, '101', '20.00', '2016-06-21 16:39:05', '2016-06-27 10:33:06', '1');
+INSERT INTO `qi_goods_amount` VALUES ('2', '1', '8', '58', '0', '0', '0', null, null, null, null, null, '150', '20.00', '2016-06-21 16:39:05', '2016-06-27 10:33:06', '1');
+INSERT INTO `qi_goods_amount` VALUES ('3', '1', '56', '57', '0', '0', '0', null, null, null, null, null, '200', '21.00', '2016-06-21 16:39:05', '2016-06-27 10:33:06', '1');
+INSERT INTO `qi_goods_amount` VALUES ('4', '1', '56', '58', '0', '0', '0', null, null, null, null, null, '210', '21.00', '2016-06-21 16:39:05', '2016-06-27 10:33:06', '1');
+INSERT INTO `qi_goods_amount` VALUES ('9', '1', '8', '59', '0', '0', '0', null, null, null, null, null, '11', '10.00', '2016-06-22 17:28:01', '2016-06-27 10:33:06', '1');
+INSERT INTO `qi_goods_amount` VALUES ('10', '1', '56', '59', '0', '0', '0', null, null, null, null, null, '123', '10.00', '2016-06-22 17:28:01', '2016-06-27 10:33:06', '1');
 
 -- ----------------------------
 -- Table structure for `qi_goods_detail`
@@ -133,35 +258,18 @@ CREATE TABLE `qi_goods_colour` (
 DROP TABLE IF EXISTS `qi_goods_detail`;
 CREATE TABLE `qi_goods_detail` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
-  `goods` int(20) NOT NULL DEFAULT '0',
+  `goods_id` int(20) NOT NULL DEFAULT '0',
   `detail` varchar(2000) NOT NULL DEFAULT '',
-  `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_eidt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of qi_goods_detail
--- ----------------------------
-
--- ----------------------------
--- Table structure for `qi_goods_size`
--- ----------------------------
-DROP TABLE IF EXISTS `qi_goods_size`;
-CREATE TABLE `qi_goods_size` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL DEFAULT '',
-  `goods` int(20) NOT NULL DEFAULT '0',
   `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of qi_goods_size
+-- Records of qi_goods_detail
 -- ----------------------------
+INSERT INTO `qi_goods_detail` VALUES ('1', '1', '<p>撒旦法发达傻店范德萨发大法师地方</p><p>撒旦法放大师傅12</p>', '2016-06-21 16:39:05', '2016-06-27 10:33:06', '1');
 
 -- ----------------------------
 -- Table structure for `qi_goods_type`
@@ -170,51 +278,24 @@ DROP TABLE IF EXISTS `qi_goods_type`;
 CREATE TABLE `qi_goods_type` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL DEFAULT '',
+  `format1` int(20) NOT NULL DEFAULT '0' COMMENT '规格',
+  `format2` int(20) NOT NULL DEFAULT '0',
+  `format3` int(20) NOT NULL DEFAULT '0',
+  `format4` int(20) NOT NULL DEFAULT '0',
+  `format5` int(20) NOT NULL DEFAULT '0',
   `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qi_goods_type
 -- ----------------------------
-INSERT INTO `qi_goods_type` VALUES ('1', '打底裤', '2015-12-21 20:46:47', '0000-00-00 00:00:00', '1');
-INSERT INTO `qi_goods_type` VALUES ('2', '丝袜', '2015-12-21 20:47:25', '0000-00-00 00:00:00', '1');
-
--- ----------------------------
--- Table structure for `qi_jd_goods`
--- ----------------------------
-DROP TABLE IF EXISTS `qi_jd_goods`;
-CREATE TABLE `qi_jd_goods` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
-  `goods_id` varchar(20) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `price` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `date_add` date NOT NULL DEFAULT '0000-00-00',
-  `date_edit` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of qi_jd_goods
--- ----------------------------
-
--- ----------------------------
--- Table structure for `qi_jd_price`
--- ----------------------------
-DROP TABLE IF EXISTS `qi_jd_price`;
-CREATE TABLE `qi_jd_price` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
-  `goods_id` varchar(20) NOT NULL DEFAULT '0',
-  `price` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of qi_jd_price
--- ----------------------------
+INSERT INTO `qi_goods_type` VALUES ('1', '打底裤', '1', '2', '0', '0', '0', '2015-12-21 20:46:47', '2016-06-16 10:35:30', '1');
+INSERT INTO `qi_goods_type` VALUES ('2', '丝袜', '1', '2', '0', '0', '0', '2015-12-21 20:47:25', '2016-06-16 14:23:45', '1');
+INSERT INTO `qi_goods_type` VALUES ('3', '手机', '1', '2', '3', '0', '0', '2016-06-16 10:37:04', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_goods_type` VALUES ('4', '其他', '1', '0', '0', '0', '0', '2016-06-16 14:23:56', '2016-06-21 13:51:23', '1');
 
 -- ----------------------------
 -- Table structure for `qi_log`
@@ -227,7 +308,7 @@ CREATE TABLE `qi_log` (
   `ip_address` varchar(32) DEFAULT NULL,
   `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qi_log
@@ -331,6 +412,27 @@ INSERT INTO `qi_log` VALUES ('96', '100', '登录成功', '127.0.0.1', '2015-12-
 INSERT INTO `qi_log` VALUES ('97', '100', '登录成功', '127.0.0.1', '2015-12-22 20:19:34');
 INSERT INTO `qi_log` VALUES ('98', '100', '登录成功', '127.0.0.1', '2015-12-23 10:43:30');
 INSERT INTO `qi_log` VALUES ('99', '100', '登录成功', '127.0.0.1', '2015-12-24 10:33:33');
+INSERT INTO `qi_log` VALUES ('100', '100', '登录成功', '127.0.0.1', '2016-05-10 10:12:22');
+INSERT INTO `qi_log` VALUES ('101', '100', '登录成功', '127.0.0.1', '2016-05-12 11:14:28');
+INSERT INTO `qi_log` VALUES ('102', '100', '登录成功', '127.0.0.1', '2016-05-16 10:08:04');
+INSERT INTO `qi_log` VALUES ('103', '100', '登录成功', '127.0.0.1', '2016-05-16 13:44:02');
+INSERT INTO `qi_log` VALUES ('104', '100', '登录成功', '127.0.0.1', '2016-05-17 09:06:56');
+INSERT INTO `qi_log` VALUES ('105', '100', '登录成功', '127.0.0.1', '2016-05-17 14:32:36');
+INSERT INTO `qi_log` VALUES ('106', '100', '登录成功', '127.0.0.1', '2016-05-30 09:19:51');
+INSERT INTO `qi_log` VALUES ('107', '100', '登录成功', '127.0.0.1', '2016-06-15 09:01:59');
+INSERT INTO `qi_log` VALUES ('108', '100', '登录成功', '127.0.0.1', '2016-06-16 08:57:13');
+INSERT INTO `qi_log` VALUES ('109', '100', '登录成功', '127.0.0.1', '2016-06-16 14:22:06');
+INSERT INTO `qi_log` VALUES ('110', '100', '登录成功', '127.0.0.1', '2016-06-17 09:58:49');
+INSERT INTO `qi_log` VALUES ('111', '100', '登录成功', '127.0.0.1', '2016-06-17 14:04:17');
+INSERT INTO `qi_log` VALUES ('112', '100', '登录成功', '127.0.0.1', '2016-06-21 09:10:51');
+INSERT INTO `qi_log` VALUES ('113', '100', '登录成功', '127.0.0.1', '2016-06-21 13:30:08');
+INSERT INTO `qi_log` VALUES ('114', '100', '登录成功', '127.0.0.1', '2016-06-22 09:30:54');
+INSERT INTO `qi_log` VALUES ('115', '100', '登录成功', '127.0.0.1', '2016-06-22 15:03:42');
+INSERT INTO `qi_log` VALUES ('116', '100', '登录成功', '127.0.0.1', '2016-06-24 08:59:02');
+INSERT INTO `qi_log` VALUES ('117', '100', '登录成功', '127.0.0.1', '2016-06-27 09:20:27');
+INSERT INTO `qi_log` VALUES ('118', '100', '登录成功', '127.0.0.1', '2016-06-27 14:08:19');
+INSERT INTO `qi_log` VALUES ('119', '100', '登录成功', '127.0.0.1', '2016-06-28 08:55:55');
+INSERT INTO `qi_log` VALUES ('120', '100', '登录成功', '127.0.0.1', '2016-06-30 09:10:21');
 
 -- ----------------------------
 -- Table structure for `qi_member`
@@ -338,15 +440,19 @@ INSERT INTO `qi_log` VALUES ('99', '100', '登录成功', '127.0.0.1', '2015-12-
 DROP TABLE IF EXISTS `qi_member`;
 CREATE TABLE `qi_member` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
-  `name_real` varchar(20) NOT NULL DEFAULT '',
-  `name_nick` varchar(20) NOT NULL DEFAULT '',
+  `name_real` varchar(20) NOT NULL COMMENT '姓名',
+  `name_nick` varchar(20) NOT NULL COMMENT '昵称',
   `password` varchar(50) NOT NULL,
-  `phone` bigint(20) NOT NULL DEFAULT '0',
+  `phone` varchar(20) NOT NULL DEFAULT '0',
   `email` varchar(50) NOT NULL DEFAULT '0',
-  `email_check` tinyint(1) NOT NULL DEFAULT '0',
-  `integral` int(20) NOT NULL DEFAULT '0',
-  `sex` tinyint(1) NOT NULL DEFAULT '0',
-  `birthday` date NOT NULL DEFAULT '0000-00-00',
+  `weixin` varchar(50) NOT NULL COMMENT '微信号',
+  `weixin_id` varchar(50) NOT NULL COMMENT '微信openid',
+  `qq` varchar(50) NOT NULL,
+  `email_check` tinyint(1) NOT NULL DEFAULT '0' COMMENT '邮箱验证',
+  `integral` int(20) NOT NULL DEFAULT '0' COMMENT '积分',
+  `sex` tinyint(1) NOT NULL DEFAULT '0' COMMENT '性别',
+  `birthday` date NOT NULL DEFAULT '0000-00-00' COMMENT '生日',
+  `headpic` varchar(100) NOT NULL,
   `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` tinyint(1) NOT NULL DEFAULT '1',
@@ -356,7 +462,7 @@ CREATE TABLE `qi_member` (
 -- ----------------------------
 -- Records of qi_member
 -- ----------------------------
-INSERT INTO `qi_member` VALUES ('1', 'jin', '123', 'edbbf7a5afd220a65983229ed6496ed9', '13665119187', '723528197@qq.com', '1', '0', '1', '2015-03-03', '2015-12-23 14:51:03', '2015-12-25 13:13:51', '1');
+INSERT INTO `qi_member` VALUES ('1', 'jin', '1234', 'edbbf7a5afd220a65983229ed6496ed9', '13665119187', '723528197@qq.com', '', '', '', '1', '0', '2', '2015-03-03', '', '2015-12-23 14:51:03', '2016-06-24 13:19:55', '1');
 
 -- ----------------------------
 -- Table structure for `qi_member_address`
@@ -364,13 +470,13 @@ INSERT INTO `qi_member` VALUES ('1', 'jin', '123', 'edbbf7a5afd220a65983229ed649
 DROP TABLE IF EXISTS `qi_member_address`;
 CREATE TABLE `qi_member_address` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
-  `member` int(20) NOT NULL,
-  `name` varchar(20) NOT NULL DEFAULT '',
-  `province` int(20) NOT NULL DEFAULT '0',
-  `city` int(20) NOT NULL DEFAULT '0',
-  `district` int(20) NOT NULL DEFAULT '0',
-  `detail` varchar(200) NOT NULL DEFAULT '',
-  `phone` int(20) NOT NULL DEFAULT '0',
+  `member_id` int(20) NOT NULL,
+  `province` int(20) NOT NULL DEFAULT '0' COMMENT '省',
+  `city` int(20) NOT NULL DEFAULT '0' COMMENT '市',
+  `district` int(20) NOT NULL DEFAULT '0' COMMENT '区',
+  `detail` varchar(200) NOT NULL COMMENT '详细地址',
+  `phone` varchar(20) NOT NULL DEFAULT '0' COMMENT '联系电话',
+  `person` varchar(20) NOT NULL COMMENT '联系人',
   `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` tinyint(1) NOT NULL DEFAULT '1',
@@ -396,7 +502,7 @@ CREATE TABLE `qi_menu` (
   `weights` int(10) NOT NULL DEFAULT '0',
   `status` tinyint(2) NOT NULL DEFAULT '1',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qi_menu
@@ -422,11 +528,16 @@ INSERT INTO `qi_menu` VALUES ('33', '影人管理', 'worker', 'my_list', '32', '
 INSERT INTO `qi_menu` VALUES ('34', '会员管理', 'member', 'my_list', '0', '1', '1', '0', '1');
 INSERT INTO `qi_menu` VALUES ('35', '会员管理', 'member', 'my_list', '34', '1', '2', '0', '1');
 INSERT INTO `qi_menu` VALUES ('36', '会员管理', 'member', 'my_list', '35', '1', '3', '0', '1');
-INSERT INTO `qi_menu` VALUES ('37', '订单管理', 'order', 'my_list', '35', '1', '3', '0', '1');
+INSERT INTO `qi_menu` VALUES ('37', '订单管理', 'order', 'my_list', '0', '1', '1', '0', '1');
 INSERT INTO `qi_menu` VALUES ('38', '商品管理', 'goods', 'my_list', '0', '1', '1', '0', '1');
 INSERT INTO `qi_menu` VALUES ('39', '商品管理', 'goods', 'my_list', '38', '1', '2', '0', '1');
 INSERT INTO `qi_menu` VALUES ('40', '商品管理', 'goods', 'my_list', '39', '1', '3', '0', '1');
-INSERT INTO `qi_menu` VALUES ('41', '商品类型', 'goods_type', 'my_list', '39', '1', '3', '0', '1');
+INSERT INTO `qi_menu` VALUES ('41', '商品设置', 'brand', 'my_list', '38', '1', '2', '0', '1');
+INSERT INTO `qi_menu` VALUES ('42', '品牌管理', 'brand', 'my_list', '41', '1', '3', '0', '1');
+INSERT INTO `qi_menu` VALUES ('43', '类型管理', 'goods_type', 'my_list', '41', '1', '3', '0', '1');
+INSERT INTO `qi_menu` VALUES ('44', '规格管理', 'format', 'my_list', '41', '1', '3', '0', '1');
+INSERT INTO `qi_menu` VALUES ('45', '订单管理', 'order', 'my_list', '37', '1', '2', '0', '1');
+INSERT INTO `qi_menu` VALUES ('46', '订单管理', 'order', 'my_list', '45', '1', '3', '0', '1');
 
 -- ----------------------------
 -- Table structure for `qi_order`
@@ -434,31 +545,34 @@ INSERT INTO `qi_menu` VALUES ('41', '商品类型', 'goods_type', 'my_list', '39
 DROP TABLE IF EXISTS `qi_order`;
 CREATE TABLE `qi_order` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
-  `number` int(20) NOT NULL DEFAULT '0',
-  `member` int(20) NOT NULL DEFAULT '0',
+  `order_no` varchar(20) NOT NULL DEFAULT '0',
+  `member_id` int(20) NOT NULL DEFAULT '0',
   `money_goods` decimal(10,2) NOT NULL DEFAULT '0.00',
   `money_preferential` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '优惠',
+  `money_shipping` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '配送费用',
   `money_end` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `payment` int(2) NOT NULL DEFAULT '0',
+  `payment_id` int(20) NOT NULL DEFAULT '0' COMMENT '支付方式',
+  `shipping_id` int(20) NOT NULL COMMENT '配送方式',
   `accept_name` varchar(20) NOT NULL DEFAULT '',
   `accept_province` int(20) NOT NULL DEFAULT '0',
   `accept_city` int(20) NOT NULL DEFAULT '0',
   `accept_district` int(20) NOT NULL DEFAULT '0',
-  `accept_detailed` varchar(200) NOT NULL DEFAULT '',
-  `accept_phone` int(20) NOT NULL DEFAULT '0',
+  `accept_detail` varchar(200) NOT NULL DEFAULT '',
+  `accept_phone` varchar(20) NOT NULL DEFAULT '0',
+  `remark` varchar(50) NOT NULL COMMENT '备注',
   `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_2` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_3` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_4` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `date_5` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0订单取消1订单提交2付款成功3商品出库4等待收货5订单完成',
+  `date_pay` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '支付日期',
+  `date_send` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '发货日期',
+  `date_end` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '结束日期',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0订单取消1订单提交2付款成功3已经发货4订单完成',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qi_order
 -- ----------------------------
+INSERT INTO `qi_order` VALUES ('1', 'o12312312312', '1', '20.00', '0.00', '0.00', '20.00', '1', '0', 'jin1', '0', '0', '0', '霞客苑1201', '13665119187', '周末在家', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2');
 
 -- ----------------------------
 -- Table structure for `qi_order_goods`
@@ -466,19 +580,23 @@ CREATE TABLE `qi_order` (
 DROP TABLE IF EXISTS `qi_order_goods`;
 CREATE TABLE `qi_order_goods` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
-  `order` int(20) NOT NULL DEFAULT '0',
-  `goods` int(20) NOT NULL DEFAULT '0',
-  `amount` int(20) NOT NULL DEFAULT '0',
+  `order_id` int(20) NOT NULL DEFAULT '0',
+  `goods_id` int(20) NOT NULL DEFAULT '0',
+  `amount_id` int(20) NOT NULL DEFAULT '0' COMMENT '规格库存id',
+  `goods_name` varchar(100) NOT NULL,
+  `goods_no` varchar(50) NOT NULL,
+  `amount` int(20) NOT NULL DEFAULT '0' COMMENT '数量',
   `money` decimal(10,2) NOT NULL DEFAULT '0.00',
   `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `statsu` tinyint(1) NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qi_order_goods
 -- ----------------------------
+INSERT INTO `qi_order_goods` VALUES ('1', '1', '1', '10', '丝袜10', 'g1231231231', '2', '10.00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
 
 -- ----------------------------
 -- Table structure for `qi_payment`
@@ -492,11 +610,13 @@ CREATE TABLE `qi_payment` (
   `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of qi_payment
 -- ----------------------------
+INSERT INTO `qi_payment` VALUES ('1', '支付宝', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `qi_payment` VALUES ('2', '微信支付', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
 
 -- ----------------------------
 -- Table structure for `qi_role`
@@ -711,6 +831,25 @@ INSERT INTO `qi_setting` VALUES ('page_number', '10');
 INSERT INTO `qi_setting` VALUES ('station_name', '7蓝');
 INSERT INTO `qi_setting` VALUES ('user_error_times', '5');
 INSERT INTO `qi_setting` VALUES ('use_captcha', '0');
+
+-- ----------------------------
+-- Table structure for `qi_shipping`
+-- ----------------------------
+DROP TABLE IF EXISTS `qi_shipping`;
+CREATE TABLE `qi_shipping` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `detail` varchar(500) NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `date_edit` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of qi_shipping
+-- ----------------------------
+INSERT INTO `qi_shipping` VALUES ('1', '免邮', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
 
 -- ----------------------------
 -- Table structure for `qi_tag`

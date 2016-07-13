@@ -101,7 +101,7 @@ $db['default'] = array(
 	'username' => 'root',
 	'password' => 'root',
 	'database' => 'qw',
-	'dbdriver' => 'mysql',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => 'qi_',
 	'pconnect' => TRUE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
